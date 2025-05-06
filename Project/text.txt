@@ -1,0 +1,12 @@
+Oleg1
+Age: 12
+Name: Oleg
+LovwC++: 1
+Oleg2
+Age: 21
+Name: Oleg1
+LovwC++: 1
+Oleg3
+Age: 213
+Name: Oleg2
+LovwC++: 1

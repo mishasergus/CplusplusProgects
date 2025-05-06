@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Hw">
+      <UniqueIdentifier>{b92da678-8d69-44d1-bee5-0cf4067e626b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw">
+      <UniqueIdentifier>{092ae23a-166a-4efb-a0e1-af23f028e18c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hw\Hw1">
+      <UniqueIdentifier>{e47c012c-0bd3-468c-af13-4089b8644a71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Cw2">
+      <UniqueIdentifier>{07ccb6cb-13dd-425d-a553-d4deba71f4ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hw\Hw2">
+      <UniqueIdentifier>{c6c0fb99-c075-464a-871e-88df2b492083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Cw3">
+      <UniqueIdentifier>{2ea2e330-3d16-4458-8370-89917947b8b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hw\Hw3">
+      <UniqueIdentifier>{8a8f4486-02f0-488a-847d-0fd2de6fc879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Cw\Cw4">
+      <UniqueIdentifier>{466a09ab-8350-46ec-88cf-bcfc002f7c22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hw\Hw4">
+      <UniqueIdentifier>{920cb814-4739-41cd-9a24-4f8f78fc31b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Cw5">
+      <UniqueIdentifier>{51086b68-90fc-4fde-acde-09c803f3a28f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hw\Hw5">
+      <UniqueIdentifier>{fe85ffdf-a09d-4b8b-ac9a-fdbbdc5b26b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Cw6">
+      <UniqueIdentifier>{9db047a4-7ac4-4522-8285-57d1e01b1656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hw\Hw6">
+      <UniqueIdentifier>{1b380811-a0e4-4a34-a633-45ba583dcf35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Cw7">
+      <UniqueIdentifier>{d868a2a8-4587-467a-9667-59ec9e7668b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Test">
+      <UniqueIdentifier>{fa191f46-c7f9-4abd-9410-ee4f8f9487f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Cw8">
+      <UniqueIdentifier>{b66ac697-0c61-4c52-ad96-042a93843a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hw\Hw8">
+      <UniqueIdentifier>{b1b43310-51a1-496a-a09f-73488377e101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Cw9">
+      <UniqueIdentifier>{1c3320f8-a2ae-4ea4-90ed-0c5fa8e82fa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hw\Hw9">
+      <UniqueIdentifier>{57256c84-e843-4b63-942f-1d684c14ccb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Cw10">
+      <UniqueIdentifier>{5f60dc85-07aa-4717-a531-d91a6404a43f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hw\Hw10">
+      <UniqueIdentifier>{af79d36c-2a32-416e-b4b2-f90adf2d47db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Cw11">
+      <UniqueIdentifier>{464a3741-d406-45e7-9339-770c9214bc73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hw\Hw11">
+      <UniqueIdentifier>{45b21d46-e769-48e7-8513-a05c9cdb4c13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Cw12">
+      <UniqueIdentifier>{b05d24bd-6d7e-47bd-a342-7a1da54e1333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hw\Hw12">
+      <UniqueIdentifier>{7c0df3ff-96e7-4f03-8b5d-4ed596c3f0f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cw\Cw13">
+      <UniqueIdentifier>{ab20321a-fc60-4066-8583-28a657ed5762}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Hw1_1.cpp">
+      <Filter>Hw\Hw1</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw2_1.cpp">
+      <Filter>Cw\Cw2</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw2_2.cpp">
+      <Filter>Cw\Cw2</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw2_1.cpp">
+      <Filter>Hw\Hw2</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw3_1.cpp">
+      <Filter>Cw\Cw3</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw3_1.cpp">
+      <Filter>Hw\Hw3</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw4_1.cpp">
+      <Filter>Cw\Cw4</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw4_1.cpp">
+      <Filter>Hw\Hw4</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw4__2.cpp">
+      <Filter>Hw\Hw4</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw5_1.cpp">
+      <Filter>Cw\Cw5</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw5_1.cpp">
+      <Filter>Hw\Hw5</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw6_1.cpp">
+      <Filter>Cw\Cw6</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw6_1.cpp">
+      <Filter>Hw\Hw6</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw7_1.cpp">
+      <Filter>Cw\Cw7</Filter>
+    </ClCompile>
+    <ClCompile Include="rest1.cpp">
+      <Filter>Cw\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw8_1.cpp">
+      <Filter>Cw\Cw8</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw8_1.cpp">
+      <Filter>Hw\Hw8</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw9_1.cpp">
+      <Filter>Cw\Cw9</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw9_1.cpp">
+      <Filter>Hw\Hw9</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw10_1.cpp">
+      <Filter>Cw\Cw10</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw10_1.cpp">
+      <Filter>Hw\Hw10</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw11_1.cpp">
+      <Filter>Cw\Cw11</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw11_1.cpp">
+      <Filter>Hw\Hw11</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw12_1.cpp">
+      <Filter>Cw\Cw12</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw12_1.cpp">
+      <Filter>Hw\Hw12</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw13_1.cpp">
+      <Filter>Cw\Cw13</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
