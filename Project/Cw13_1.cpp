@@ -140,7 +140,7 @@ int main()
             cout << "|  Enter name of file(Witout txt):               |\n";
             cout << "|  ";
             cin >> nameOfFile;
-            cout << "                                    |\n";
+            cout << "                                      |\n";
             while (true) {
                 for (int i = 0; i < size; i++)
                 {
@@ -177,7 +177,6 @@ int main()
                     cout << "                                    |\n";
                 }
             }
-
         }
     }
     
