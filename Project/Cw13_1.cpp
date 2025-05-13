@@ -43,6 +43,7 @@ public:
 
 };
 
+
 void writeRundNums(string& file, int nOfNums) {
     fstream obj;
     obj.open(file, ios::out);
@@ -80,6 +81,50 @@ void read(string& file) {
     }
     else {
         cout << "File can not be opened..." << endl;
+    }
+}
+
+int nOfSimb(string& file) {
+    ifstream obj(file + ".txt");
+    int num = 0;
+    //obj.open(file, ios::in);
+    if (obj.is_open())
+    {
+        for (char letter;obj.get(letter);)
+        {
+            num ++;
+        }
+        obj.close();
+    }
+    else {
+        cout << "File can not be opened..." << endl;
+    }
+    return num;
+}
+
+void copy(string oldName, string newName)
+{
+    ifstream obj(oldName + ".txt");
+    string txt;
+    obj.open(oldName, ios::in);
+    if (obj.is_open())
+    {
+        for (char letter;obj.get(letter);)
+        {
+            txt += letter;
+        }
+        obj.close();
+    }
+    else {
+        cout << "File can not be opened..." << endl;
+    }
+    
+    fstream obj2;
+    obj2.open(newName, ios::out);
+    if (obj2.is_open())
+    {
+        obj2 << txt << endl;
+        obj2.close();
     }
 }
 
@@ -143,6 +188,8 @@ int main()
         cout << "|  2-read file                                   |\n";
         cout << "|                                                |\n";
         cout << "|  3-copy and create new file                    |\n";
+        cout << "|                                                |\n";
+        cout << "|  4-number of simb                              |\n";
         cout << "|                                                |\n";
         cin >> answr;
 
@@ -226,6 +273,70 @@ int main()
 
                 }*/
             read(nameOfFile);
+        }
+        else if (answr == 3) {
+            cout << "|  Enter name of file(Witout txt):               |\n";
+            cout << "|  ";
+            cin >> nameOfFile;
+            cout << "                                      |\n";
+            string oldNameOfFile;
+            cout << "|  Enter name of OLD file(Witout txt):           |\n";
+            cout << "|  ";
+            cin >> oldNameOfFile;
+            cout << "                                      |\n";
+            while (true) {
+                ispovtor = 0;
+                for (int i = 0; i < size; i++)
+                {
+                    if (nameOfFile == namesOfFiles[i]) {
+                        ispovtor = 1;
+                    }
+                }
+                if (!ispovtor) {
+                    string* namesOfFilesProm = new string[size];
+                    for (int i = 0; i < size; i++)
+                    {
+                        namesOfFilesProm[i] = namesOfFiles[i];
+                    }
+                    delete[] namesOfFiles;
+                    size++;
+                    namesOfFiles = new string[size];
+                    //string* namesOfFiles = new string[size];
+                    for (int i = 0; i < size; i++)
+                    {
+                        if (i == size - 1) {
+                            namesOfFiles[i] = nameOfFile;
+                        }
+                        else {
+                            namesOfFiles[i] = namesOfFilesProm[i];
+                        }
+                    }
+                    delete[] namesOfFilesProm;
+                    // ispovtor = 0;
+                    break;
+                }
+                else
+                {
+                    cout << "|  Enter name of file(Witout txt):               |\n";
+                    cout << "|  ";
+                    cin >> nameOfFile;
+                    cout << "                                    |\n";
+                    // ispovtor = 0;
+                }
+            }
+            string zminnax = nameOfFile + ".txt";
+            string zminnay = oldNameOfFile + ".txt";
+            copy(zminnay, zminnax);
+
+        }
+        else if (answr == 4) {
+            cout << "|  Enter name of file(Witout txt):               |\n";
+            cout << "|  ";
+            cin >> nameOfFile;
+            cout << "                                      |\n";
+
+            string zminnax = nameOfFile;
+            cout << nOfSimb(zminnax)<<endl;
         }
     }
     delete[]namesOfFiles;
