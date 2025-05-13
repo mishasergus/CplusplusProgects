@@ -91,6 +91,9 @@
     <Filter Include="Cw\Cw13">
       <UniqueIdentifier>{ab20321a-fc60-4066-8583-28a657ed5762}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Cw\Cw14">
+      <UniqueIdentifier>{dcea6e71-c9f1-4b15-b741-202fe163a506}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Hw1_1.cpp">
@@ -170,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="Cw13_1.cpp">
       <Filter>Cw\Cw13</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw14_1.cpp">
+      <Filter>Cw\Cw14</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

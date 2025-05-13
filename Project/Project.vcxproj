@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +132,7 @@
     <ClCompile Include="Cw11_1.cpp" />
     <ClCompile Include="Cw12_1.cpp" />
     <ClCompile Include="Cw13_1.cpp" />
+    <ClCompile Include="Cw14_1.cpp" />
     <ClCompile Include="Cw2_1.cpp" />
     <ClCompile Include="Cw2_2.cpp" />
     <ClCompile Include="Cw3_1.cpp" />
