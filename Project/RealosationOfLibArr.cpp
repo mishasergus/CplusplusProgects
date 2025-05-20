@@ -64,3 +64,35 @@ void sort_parn(int mass[], int size) {
 		}
 	}
 }
+
+void sort_localMaxs(int mass[], int size) {
+	int nOfLocMax = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (i != 0 && i != size - 1 && mass[i] > mass[i-1] && mass[i] > mass[i + 1]) {
+			nOfLocMax++;
+		}
+	}
+	int* locMaxArr= new int[nOfLocMax];
+	nOfLocMax = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (i != 0 && i != size - 1 && mass[i] > mass[i - 1] && mass[i] > mass[i + 1]) {
+			locMaxArr[nOfLocMax] = mass[i];
+			nOfLocMax++;
+		}
+	}
+	for (int i = 0; i < nOfLocMax; i++)
+	{
+		for (int j = 0; j < nOfLocMax; j++)
+		{
+			if (locMaxArr[i] < locMaxArr[j] && i <= j) {
+				int prom = locMaxArr[i];
+				locMaxArr[i] = locMaxArr[j];
+				locMaxArr[j] = prom;
+			}
+		}
+		cout << locMaxArr[i] << ' ';
+	}
+	cout << "\n";
+}

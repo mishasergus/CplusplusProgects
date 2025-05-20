@@ -11,12 +11,13 @@ void hello();
 int main()
 {
     srand(time(0));
-    cout << add(1, 4) << "\n";
-    int arr[5] = { 1,2,4,5,6 };
-    showArr(arr, 5);
+    /*cout << add(1, 4) << "\n";*/
+    int arr[5] = { 1,5,4,88,6 };
+    /*showArr(arr, 5);
     sort_parn(arr, 5);
-    showArr(arr, 5);
-    hello();
+    showArr(arr, 5);*/
+    sort_localMaxs(arr, 5);
+    /*hello();*/
 
 }
 
