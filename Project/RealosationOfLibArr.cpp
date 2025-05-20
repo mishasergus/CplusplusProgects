@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "ArrOperations.h"
 using namespace std;
 
@@ -95,4 +96,37 @@ void sort_localMaxs(int mass[], int size) {
 		cout << locMaxArr[i] << ' ';
 	}
 	cout << "\n";
+}
+void paras(int mass[], int size) {
+	string* parasArr = new string[size];
+	int* numOfParasArr = new int[size];
+	for (int i = 1; i < size; i++)
+	{
+		string para = to_string(mass[i - 1]) + to_string(mass[i]);
+		parasArr[i] = para;
+		numOfParasArr[i] = 0;
+		for (int j = 1; j < size; j++)
+		{
+			string parax2 = to_string(mass[j - 1]) + to_string(mass[j]);
+			if (parasArr[i] == parax2) {
+				numOfParasArr[i]++;
+			}
+		}
+		cout << "Para:" << para << "\n";
+		cout << "Num of el:" << numOfParasArr[i] << "\n";
+		cout << "||||||||||||||||||||||||||||||||||||||||||||||||||||" << "\n";
+	}
+	int indexOfBiggest = 0;
+	int max = numOfParasArr[0];
+	for (int i = 1; i < size; i++)
+	{
+		if (max < numOfParasArr[i]) {
+			indexOfBiggest = i;
+			max = numOfParasArr[i];
+		}
+	}
+	cout << "|||||||||||||||||||||BIGGEST||||||||||||||||||||||||" << "\n";
+	cout << "||||||||||||||||||||||||||||||||||||||||||||||||||||" << "\n";
+	cout << "Para:" << parasArr[indexOfBiggest] << "\n";
+	cout << "Num of el:" << numOfParasArr[indexOfBiggest] << "\n";
 }
