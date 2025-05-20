@@ -133,6 +133,7 @@
     <ClCompile Include="Cw12_1.cpp" />
     <ClCompile Include="Cw13_1.cpp" />
     <ClCompile Include="Cw14_1.cpp" />
+    <ClCompile Include="Cw15_1.cpp" />
     <ClCompile Include="Cw2_1.cpp" />
     <ClCompile Include="Cw2_2.cpp" />
     <ClCompile Include="Cw3_1.cpp" />
@@ -155,7 +156,12 @@
     <ClCompile Include="Hw6_1.cpp" />
     <ClCompile Include="Hw8_1.cpp" />
     <ClCompile Include="Hw9_1.cpp" />
+    <ClCompile Include="RealosationOfLibArr.cpp" />
     <ClCompile Include="rest1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArrOperations.h" />
+    <ClInclude Include="Math.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

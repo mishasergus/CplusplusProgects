@@ -97,6 +97,9 @@
     <Filter Include="Hw\Hw14">
       <UniqueIdentifier>{89994aa0-8e92-4e6d-b4a5-6762163a8213}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Cw\Cw15">
+      <UniqueIdentifier>{dfa5b209-756e-4804-8196-6213a1eabedd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Hw1_1.cpp">
@@ -183,5 +186,19 @@
     <ClCompile Include="Hw14_1.cpp">
       <Filter>Hw\Hw14</Filter>
     </ClCompile>
+    <ClCompile Include="Cw15_1.cpp">
+      <Filter>Cw\Cw15</Filter>
+    </ClCompile>
+    <ClCompile Include="RealosationOfLibArr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrOperations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
