@@ -100,6 +100,9 @@
     <Filter Include="Cw\Cw15">
       <UniqueIdentifier>{dfa5b209-756e-4804-8196-6213a1eabedd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hw\Hw15">
+      <UniqueIdentifier>{ad5e3d35-d09e-45ed-953e-2d192eb92216}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Hw1_1.cpp">
@@ -191,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="RealosationOfLibArr.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw15_1.cpp">
+      <Filter>Hw\Hw15</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
