@@ -1,0 +1,13 @@
+WW Tom surename: Dickens fathername: Tomovich age: 17 midMark: 99
+ WW Bob surename: Dickens fathername: Walterovich age: 18 midMark: 90
+ WW Tom surename: Ayris fathername: Walterovich age: 17 midMark: 80
+ WW Eliot surename: Fellows fathername: Antonioovich age: 16 midMark: 73
+ WW Tom surename: Dickens fathername: Irisovich age: 16 midMark: 72
+ WW Aaron surename: Pripipi fathername: Jesikaovich age: 17 midMark: 41
+ WW Stesy surename: Caferro fathername: Irisovich age: 18 midMark: 27
+ WW Eliot surename: Caferro fathername: Aaronovich age: 17 midMark: 10
+ WW Iris surename: Edge fathername: Antonioovich age: 17 midMark: 8
+ 
+ 
+
+ 

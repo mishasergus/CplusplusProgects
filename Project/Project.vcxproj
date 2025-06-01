@@ -157,12 +157,15 @@
     <ClCompile Include="Hw6_1.cpp" />
     <ClCompile Include="Hw8_1.cpp" />
     <ClCompile Include="Hw9_1.cpp" />
+    <ClCompile Include="RealisationOfProjectStud.cpp" />
     <ClCompile Include="RealosationOfLibArr.cpp" />
     <ClCompile Include="rest1.cpp" />
+    <ClCompile Include="test2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArrOperations.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="StudentsProject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

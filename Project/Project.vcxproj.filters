@@ -198,12 +198,21 @@
     <ClCompile Include="Hw15_1.cpp">
       <Filter>Hw\Hw15</Filter>
     </ClCompile>
+    <ClCompile Include="test2.cpp">
+      <Filter>Cw\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="RealisationOfProjectStud.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ArrOperations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentsProject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
