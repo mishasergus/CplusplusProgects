@@ -204,6 +204,9 @@
     <ClCompile Include="RealisationOfProjectStud.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test3.cpp">
+      <Filter>Cw\Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">

@@ -161,6 +161,7 @@
     <ClCompile Include="RealosationOfLibArr.cpp" />
     <ClCompile Include="rest1.cpp" />
     <ClCompile Include="test2.cpp" />
+    <ClCompile Include="test3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArrOperations.h" />
