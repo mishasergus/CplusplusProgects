@@ -28,6 +28,7 @@ private:
 	string nameOfMark;
 	int baseSiz = 0;
 	string* testBase = new string[baseSiz];
+	int numberOfStudent;
 public:
 	User(string login1, string password1, string name1, string surename1, string fathername1, string adress1, int phone1, string nameOfMark1) {
 		login = login1;
@@ -52,6 +53,7 @@ public:
 			}
 			n++;
 		}
+		numberOfStudent = n;
 		nameOfMark = prom + "/" + nameOfMark1 + ".txt";
 		fstream obj1(nameOfMark, ios::out);
 		obj1.close();
@@ -62,6 +64,127 @@ public:
 		}
 		obj2.close();
 	}
+	//////////////////////////////////////////////////////////////////////////////////////////
+	string get_login() {
+		fstream obj1("Users/User" + to_string(numberOfStudent)+ "/info.txt", ios::in);
+		string txt = "";
+		bool next = false;
+		if (obj1.is_open()) {
+			while (getline(obj1, txt)) {
+				if (next) {
+					return txt;
+				}
+				if (txt == "Login:") {
+					next = true;
+				}
+			}
+		}
+		return "";
+	}
+	string get_password() {
+		fstream obj1("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::in);
+		string txt = "";
+		bool next = false;
+		if (obj1.is_open()) {
+			while (getline(obj1, txt)) {
+				if (next) {
+					string passw = "";
+					for (char simv : txt)
+					{
+						int nOfSimv = simv;
+						passw += static_cast<char>(nOfSimv - 5);
+					}
+					return passw;
+				}
+				if (txt == "Password:") {
+					next = true;
+				}
+			}
+		}
+		return "";
+	}
+	string get_name() {
+		fstream obj1("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::in);
+		string txt = "";
+		bool next = false;
+		if (obj1.is_open()) {
+			while (getline(obj1, txt)) {
+				if (next) {
+					return txt;
+				}
+				if (txt == "Name:") {
+					next = true;
+				}
+			}
+		}
+		return "";
+	}
+	string get_surename() {
+		fstream obj1("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::in);
+		string txt = "";
+		bool next = false;
+		if (obj1.is_open()) {
+			while (getline(obj1, txt)) {
+				if (next) {
+					return txt;
+				}
+				if (txt == "Surename:") {
+					next = true;
+				}
+			}
+		}
+		return "";
+	}
+	string get_fathername() {
+		fstream obj1("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::in);
+		string txt = "";
+		bool next = false;
+		if (obj1.is_open()) {
+			while (getline(obj1, txt)) {
+				if (next) {
+					return txt;
+				}
+				if (txt == "Fathername:") {
+					next = true;
+				}
+			}
+		}
+		return "";
+	}
+	string get_adress() {
+		fstream obj1("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::in);
+		string txt = "";
+		bool next = false;
+		if (obj1.is_open()) {
+			while (getline(obj1, txt)) {
+				if (next) {
+					return txt;
+				}
+				if (txt == "Adress:") {
+					next = true;
+				}
+			}
+		}
+		return "";
+	}
+	string get_phone() {
+		fstream obj1("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::in);
+		string txt = "";
+		bool next = false;
+		if (obj1.is_open()) {
+			while (getline(obj1, txt)) {
+				if (next) {
+					return txt;
+				}
+				if (txt == "Phone:") {
+					next = true;
+				}
+			}
+		}
+		return "";
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////
 	void passTheTest(int nOfTest, int nOfNowQuest = 1,int nowCorrect = 0) {
 		int correct = nowCorrect;
 		int n = 1;
@@ -140,9 +263,16 @@ public:
 		}
 		if (n != 0&&answ!="exit\n") {
 			fstream obj1(nameOfMark, ios::out);
-			int mark = round((correct / n) * 12);
+			int mark = round((float(correct) / float(n)) * 12.0);
 			if (obj1.is_open()) {
-				obj1 << to_string(nOfTest) << " " << mark;
+				fstream obj2("Tests/Test" + to_string(nOfTest) + "/name.txt", ios::in);
+				if (obj2.is_open()) {
+					string t = "";
+					while (getline(obj2, t)) {
+						obj1 << t << " " << mark;
+					}
+				}
+				obj2.close();
 			}
 			cout << "U got " << correct << " correct from " << n << " possible. U`r mark is " << mark << "\n";
 			obj1.close();
@@ -161,5 +291,6 @@ int main()
 {
 	srand(time(0));	
 	User user1("qwerty@dmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535,"Oleg`sMarks");
+	user1.passTheTest(1);
 	/*user1.passTheTest(1);*/
 }
