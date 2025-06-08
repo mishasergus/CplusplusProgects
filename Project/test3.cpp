@@ -31,7 +31,12 @@ private:
 public:
 	User(string login1, string password1, string name1, string surename1, string fathername1, string adress1, int phone1, string nameOfMark1) {
 		login = login1;
-		password = password1;
+		password = "";
+		for (char simv : password1)
+		{
+			int nOfSimv = simv;
+			password += static_cast<char>(nOfSimv + 5);
+		}
 		name = name1;
 		surename = surename1;
 		fathername = fathername1;
@@ -156,5 +161,5 @@ int main()
 {
 	srand(time(0));	
 	User user1("qwerty@dmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535,"Oleg`sMarks");
-	user1.passTheTest(1);
+	/*user1.passTheTest(1);*/
 }
