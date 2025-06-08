@@ -1,0 +1,5 @@
+Do you speak English?
+a)No
+b)Sho
+c)Yes my dear teacher, I speak English very well
+b

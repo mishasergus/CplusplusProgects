@@ -25,9 +25,10 @@ private:
 	string fathername;
 	string adress;
 	int phone;
-	string artessOfMark;
+	string nameOfMark;
+	string* testBase = new string[0];
 public:
-	User(string login1, string password1, string name1, string surename1, string fathername1, string adress1, int phone1, string artessOfMark1) {
+	User(string login1, string password1, string name1, string surename1, string fathername1, string adress1, int phone1, string nameOfMark1) {
 		login = login1;
 		password = password1;
 		name = name1;
@@ -35,19 +36,38 @@ public:
 		fathername = fathername1;
 		adress = adress1;
 		phone = phone1;
-		artessOfMark = "markDir/" + artessOfMark1;
-		fstream obj1(artessOfMark+".txt", ios::out);
+		int n = 1;
+		string prom;
+		while (true) {
+			prom = "Users/User" + to_string(n);
+			if (!fs::exists(prom)) {
+				fs::create_directory(prom);
+				break;
+			}
+			n++;
+		}
+		nameOfMark = prom + "/" + nameOfMark1 + ".txt";
+		fstream obj1(nameOfMark, ios::out);
 		obj1.close();
-		fstream obj2("arrOfUsers.txt", ios::out);
+		fstream obj2(prom+"/info.txt", ios::out);
 		if (obj2.is_open())
 		{
-			obj2 << login << ' ' << password << ' ' << name << ' ' << surename << ' ' << fathername << ' ' << adress << ' ' << phone << ' ' << artessOfMark << '\n';
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password << '\n' << "Name:\n" << name << '\n' << "Surename:\n" << surename << '\n' << "Fathername:\n" << fathername << '\n' << "Adress:\n" << adress << '\n' <<"Phone:\n" << phone;
 		}
 		obj2.close();
 	}
 	void passTheTest(int nOfTest) {
 		int correct = 0;
-		for (int j = 0; j <= 12; j++)
+		int n = 1;
+		while (true) {
+			string prom = "Tests/Test" + to_string(nOfTest)+"/question" + to_string(n)+".txt";
+			if (!fs::exists(prom)) {
+				n--;
+				break;
+			}
+			n++;
+		}
+		for (int j = 1; j <= n; j++)
 		{
 			fstream obj2("Tests/Test" + to_string(nOfTest) + "/question" + to_string(j) + ".txt", ios::in);
 			if (obj2.is_open())
@@ -56,7 +76,6 @@ public:
 				string* text = new string[siz];
 				string txt = "";
 				while (getline(obj2, txt)) {
-					txt = "";
 					string* textCopy = new string[siz];
 					for (int i = 0;i < siz;i++) {
 						textCopy[i] = text[i];
@@ -66,7 +85,7 @@ public:
 					text = new string[siz];
 					for (int i = 0;i < siz;i++) {
 						if (i == siz - 1) {
-							text[i] = txt;
+							text[i] = txt+"\n";
 						}
 						else {
 							text[i] = textCopy[i];
@@ -75,15 +94,16 @@ public:
 					delete[]textCopy;
 					txt.clear();
 				}
-				for (int i = 0; i < text->length() + 1; i++)
+				for (int i = 0; i < siz; i++)
 				{
-					if (text->length() + 1 != i) {
+					if (siz-1 != i) {
 						cout << text[i];
 					}
 					else {
 						string answ;
 						cout << ":\n";
 						cin >> answ;
+						answ += "\n";
 						if (answ == text[i]) {
 							correct++;
 						}
@@ -92,6 +112,18 @@ public:
 
 			}
 			obj2.close();
+		}
+		if (n != 0) {
+			fstream obj1(nameOfMark, ios::out);
+			int mark = round((correct / n) * 12);
+			if (obj1.is_open()) {
+				obj1 << to_string(nOfTest) << " " << mark;
+			}
+			cout << "U got " << correct << " correct from " << n << " possible. U`r mark is " << mark << "\n";
+			obj1.close();
+		}
+		else {
+			cout << "Test in undefined\n";
 		}
 	}
 };
@@ -106,12 +138,6 @@ public:
 int main()
 {
 	srand(time(0));	
-	string* arr = new string[3];
-	arr[0] = "dd";
-	arr[1] = "wwddww";
-	arr[2] = "dd";
-	for (int i = 0; i < arr->length(); i++)
-	{
-		cout << i << endl;
-	}
+	User user1("qwerty@dmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535,"Oleg`sMarks");
+	user1.passTheTest(1);
 }
