@@ -1,0 +1,14 @@
+Login:
+qwerty@dmail.com
+Password:
+qwerty123
+Name:
+Oleg
+Surename:
+Olegov
+Fathername:
+Olegovich
+Adress:
+Olegova2
+Phone:
+2106207615

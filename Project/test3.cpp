@@ -26,7 +26,8 @@ private:
 	string adress;
 	int phone;
 	string nameOfMark;
-	string* testBase = new string[0];
+	int baseSiz = 0;
+	string* testBase = new string[baseSiz];
 public:
 	User(string login1, string password1, string name1, string surename1, string fathername1, string adress1, int phone1, string nameOfMark1) {
 		login = login1;
@@ -56,9 +57,10 @@ public:
 		}
 		obj2.close();
 	}
-	void passTheTest(int nOfTest) {
-		int correct = 0;
+	void passTheTest(int nOfTest, int nOfNowQuest = 1,int nowCorrect = 0) {
+		int correct = nowCorrect;
 		int n = 1;
+		string answ;
 		while (true) {
 			string prom = "Tests/Test" + to_string(nOfTest)+"/question" + to_string(n)+".txt";
 			if (!fs::exists(prom)) {
@@ -67,7 +69,7 @@ public:
 			}
 			n++;
 		}
-		for (int j = 1; j <= n; j++)
+		for (int j = nOfNowQuest; j <= n; j++)
 		{
 			fstream obj2("Tests/Test" + to_string(nOfTest) + "/question" + to_string(j) + ".txt", ios::in);
 			if (obj2.is_open())
@@ -100,9 +102,27 @@ public:
 						cout << text[i];
 					}
 					else {
-						string answ;
-						cout << ":\n";
+						cout << "(exit) to exit:\n";
 						cin >> answ;
+						if (answ == "exit") {
+							string* testBaseCopy = new string[baseSiz];
+							for (int j = 0;j < baseSiz;j++) {
+								testBaseCopy[j] = testBase[j];
+							}
+							baseSiz++;
+							delete[]testBase;
+							testBase = new string[baseSiz];
+							for (int j = 0;j < baseSiz;j++) {
+								if (j == baseSiz - 1) {
+									testBase[j] = to_string(nOfTest) + " " + to_string(j) + " " + to_string(correct) + " ";
+								}
+								else {
+									testBase[j] = testBaseCopy[j];
+								}
+							}
+							delete[]testBaseCopy;
+							txt.clear();
+						}
 						answ += "\n";
 						if (answ == text[i]) {
 							correct++;
@@ -113,7 +133,7 @@ public:
 			}
 			obj2.close();
 		}
-		if (n != 0) {
+		if (n != 0&&answ!="exit\n") {
 			fstream obj1(nameOfMark, ios::out);
 			int mark = round((correct / n) * 12);
 			if (obj1.is_open()) {
@@ -121,9 +141,6 @@ public:
 			}
 			cout << "U got " << correct << " correct from " << n << " possible. U`r mark is " << mark << "\n";
 			obj1.close();
-		}
-		else {
-			cout << "Test in undefined\n";
 		}
 	}
 };
