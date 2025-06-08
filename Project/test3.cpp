@@ -22,6 +22,7 @@ private:
 	string* testBase = new string[baseSiz];
 	int numberOfStudent;
 public:
+	User() : login(""), password(""), name(""), surename(""), fathername(""), adress(""), phone(0) {}
 	User(string login1, string password1, string name1, string surename1, string fathername1, string adress1, int phone1) {
 		login = login1;
 		password = "";
@@ -382,11 +383,15 @@ public:
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////
 	void set_own_login(string login1) {
+		string passw = "";
+		for (char simv : password) {
+			passw += static_cast<char>(simv - 5);
+		}
 		while (true) {
 			string prom;
 			cout << "Password:\n";
 			cin >> prom;
-			if (prom == password) {
+			if (prom == passw) {
 				break;
 			}
 		}
@@ -401,11 +406,15 @@ public:
 		cout << "SUCCES\n";
 	}
 	void set_own_password(string password1) {
+		string passw = "";
+		for (char simv : password) {
+			passw += static_cast<char>(simv - 5);
+		}
 		while (true) {
 			string prom;
 			cout << "Password(old):\n";
 			cin >> prom;
-			if (prom == password) {
+			if (prom == passw) {
 				break;
 			}
 		}
@@ -424,7 +433,7 @@ public:
 		obj2.close();
 		cout << "SUCCES\n";
 	}
-	void makeNewUser(User *user) {
+	void makeNewUser(User *&user, User arr[], int *size) {
 		string mail1;
 		cout << "E-mail:\n";
 		cin >> mail1;
@@ -458,12 +467,31 @@ public:
 		cin >> nameOfMark1;
 
 		user = new User(mail1, password1, name1, surename1, fathername1, adress1, number);
+
+		User* arrCopy = new User[*size];
+		for (int i = 0; i < *size; i++)
+		{
+			arrCopy[i] = arr[i];
+		}
+		*size += 1;
+		delete[]arr;
+		arr = new User[*size];
+		for (int i = 0; i < *size; i++)
+		{
+			if (i == *size - 1) {
+				arr[i] = *user;
+			}
+			else {
+				arr[i] = arrCopy[i];
+			}
+		}
+		delete[]arrCopy;
 	}
 	void delUser(User* user) {
 		delete user;
 		user = nullptr;
 	}
-	void edit(User* user){
+	void edit(User*& user){
 		while (true) {
 			int choise;
 			cout << "|||||||||||||||||||||||||||||||||||||\n";
@@ -528,6 +556,136 @@ public:
 			}
 		}
 	}
+	void showAllMarks(User* arr[],int size) {
+		if (fs::exists("Admin/allMarks.txt")) {
+			fs::remove_all("Admin/allMarks.txt");
+		}
+		fstream obj1("Admin/allMarks.txt", ios::out);
+		if (obj1.is_open())
+		{
+			for (int i = 1; i <= size; i++)
+			{
+				obj1 << "User" << i << ":\n";
+				cout << "User" << i << ":\n";
+				fstream obj2("Users/User"+to_string(i) + "/marks.txt", ios::in);
+				if (obj2.is_open())
+				{
+					string txt;
+					while (getline(obj2, txt)) {
+						obj1 << txt << "\n";
+						cout << txt << "\n";
+					}
+				}
+				obj2.close();
+			}
+		}
+		obj1.close();
+	}
+	void showMarksByCategory(User* arr[], int size,int nOfCategory) {
+		if (fs::exists("Admin/marksBy" + to_string(nOfCategory) + ".txt")) {
+			fs::remove_all("Admin/marksBy" + to_string(nOfCategory) + ".txt");
+		}
+		fstream obj1("Admin/marksBy" + to_string(nOfCategory) + ".txt", ios::out);
+		if (obj1.is_open())
+		{
+			for (int i = 1; i <= size; i++)
+			{
+				obj1 << "User" << i << ":\n";
+				cout << "User" << i << ":\n";
+				fstream obj2("Users/User" + to_string(i) + "/marks.txt", ios::in);
+				if (obj2.is_open())
+				{
+					string txt;
+					while (getline(obj2, txt)) {
+						int ind = 0;
+						int num = 0;
+						for (int j = 0; j < txt.size(); j++)
+						{
+							if (txt[j] == ',') {
+								ind = j;
+								break;
+							}
+						}
+						for (int j = 0; j < ind; j++)
+						{
+							num += (int(txt[j])-48) * pow(10, ind - 1 - j);
+						}
+						if (num == nOfCategory) {
+							obj1 << txt << "\n";
+							cout << txt << "\n";
+						}
+					}
+				}
+				obj2.close();
+			}
+		}
+		obj1.close();
+	}
+	void showMarksByName(User* arr[], int size, string nameOfTest) {
+		if (fs::exists("Admin/marksBy" + nameOfTest + ".txt")) {
+			fs::remove_all("Admin/marksBy" + nameOfTest + ".txt");
+		}
+		fstream obj1("Admin/marksBy" + nameOfTest + ".txt", ios::out);
+		if (obj1.is_open())
+		{
+			for (int i = 1; i <= size; i++)
+			{
+				obj1 << "User" << i << ":\n";
+				cout << "User" << i << ":\n";
+				fstream obj2("Users/User" + to_string(i) + "/marks.txt", ios::in);
+				if (obj2.is_open())
+				{
+					string txt;
+					while (getline(obj2, txt)) {
+						int ind1 = 0;
+						int ind2 = 0;
+						string thema = "";
+						bool first = true;
+						for (int j = 0; j < txt.size(); j++)
+						{
+							if (txt[j] == ','&& first) {
+								ind1 = j;
+							}
+							if (txt[j] == ' ') {
+								ind2 = j;
+							}
+						}
+						for (int j = ind1+1; j < ind2; j++)
+						{
+							thema += txt[j];
+						}
+						if (thema == nameOfTest) {
+							obj1 << txt << "\n";
+							cout << txt << "\n";
+						}
+					}
+				}
+				obj2.close();
+			}
+		}
+		obj1.close();
+	}
+	void showMarksByUser(User* arr[], int index) {
+		if (fs::exists("Admin/marksByUser" + to_string(index) + ".txt")) {
+			fs::remove_all("Admin/marksByUser" + to_string(index) + ".txt");
+		}
+		fstream obj2("Admin/marksByUser" + to_string(index) + ".txt", ios::out);
+		if (obj2.is_open()) {
+			fstream obj1("Users/User" + to_string(index) + "/marks.txt", ios::in);
+			if (obj1.is_open())
+			{
+				obj2 << "User" << index << ":\n";
+				cout << "User" << index << ":\n";
+				string txt;
+				while (getline(obj1, txt)) {
+					obj2 << txt << "\n";
+					cout << txt << "\n";
+				}
+			}
+			obj1.close();
+		}
+		obj2.close();
+	}
 
 };
 
@@ -537,6 +695,9 @@ public:
 int main()
 {
 	srand(time(0));	
+	int catSiz = 1;
+	string* categoryArr = new string[catSiz];
+	categoryArr[0] = "foreign language";
 	/*User* user;
 	makeNewUser(&user);*/
 	User* user1 = new User("qwerty@gmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535);
