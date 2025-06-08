@@ -1,0 +1,14 @@
+Login:
+qwerty@gmail.com
+Password:
+v|jwy~678
+Name:
+Oleg
+Surename:
+Olegov
+Fathername:
+Olegovich
+Adress:
+Olegova2
+Phone:
+2106207615

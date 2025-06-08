@@ -7,14 +7,6 @@
 using namespace std;
 namespace fs = filesystem;
 
-class Admin
-{
-private:
-
-public:
-
-};
-
 class User
 {
 private:
@@ -30,7 +22,7 @@ private:
 	string* testBase = new string[baseSiz];
 	int numberOfStudent;
 public:
-	User(string login1, string password1, string name1, string surename1, string fathername1, string adress1, int phone1, string nameOfMark1) {
+	User(string login1, string password1, string name1, string surename1, string fathername1, string adress1, int phone1) {
 		login = login1;
 		password = "";
 		for (char simv : password1)
@@ -54,13 +46,13 @@ public:
 			n++;
 		}
 		numberOfStudent = n;
-		nameOfMark = prom + "/" + nameOfMark1 + ".txt";
+		nameOfMark = prom + "/" + "marks.txt";
 		fstream obj1(nameOfMark, ios::out);
 		obj1.close();
 		fstream obj2(prom+"/info.txt", ios::out);
 		if (obj2.is_open())
 		{
-			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password << '\n' << "Name:\n" << name << '\n' << "Surename:\n" << surename << '\n' << "Fathername:\n" << fathername << '\n' << "Adress:\n" << adress << '\n' <<"Phone:\n" << phone;
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password << '\n' << "Name:\n" << name << '\n' << "Surename:\n" << surename << '\n' << "Fathername:\n" << fathername << '\n' << "Adress:\n" << adress << '\n' <<"Phone:\n" << to_string(phone);
 		}
 		obj2.close();
 	}
@@ -184,6 +176,88 @@ public:
 		return "";
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////
+	void set_login(string login1) {
+		login = login1;
+		fs::remove_all("Users/User" + to_string(numberOfStudent) + "/info.txt");
+		fstream obj2("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::out);
+		if (obj2.is_open())
+		{
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password << '\n' << "Name:\n" << name << '\n' << "Surename:\n" << surename << '\n' << "Fathername:\n" << fathername << '\n' << "Adress:\n" << adress << '\n' << "Phone:\n" << to_string(phone);
+		}
+		obj2.close();
+		cout << "SUCCES\n";
+	}
+	void set_password(string password1) {
+		password = "";
+		for (char simv : password1)
+		{
+			int nOfSimv = simv;
+			password += static_cast<char>(nOfSimv + 5);
+		}
+		fs::remove_all("Users/User" + to_string(numberOfStudent) + "/info.txt");
+		fstream obj2("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::out);
+		if (obj2.is_open())
+		{
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password << '\n' << "Name:\n" << name << '\n' << "Surename:\n" << surename << '\n' << "Fathername:\n" << fathername << '\n' << "Adress:\n" << adress << '\n' << "Phone:\n" << to_string(phone);
+		}
+		obj2.close();
+		cout << "SUCCES\n";
+	}
+	void set_name(string name1) {
+		name = name1;
+		fs::remove_all("Users/User" + to_string(numberOfStudent) + "/info.txt");
+		fstream obj2("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::out);
+		if (obj2.is_open())
+		{
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password << '\n' << "Name:\n" << name << '\n' << "Surename:\n" << surename << '\n' << "Fathername:\n" << fathername << '\n' << "Adress:\n" << adress << '\n' << "Phone:\n" << to_string(phone);
+		}
+		obj2.close();
+		cout << "SUCCES\n";
+	}
+	void set_surename(string surename1) {
+		surename = surename1;
+		fs::remove_all("Users/User" + to_string(numberOfStudent) + "/info.txt");
+		fstream obj2("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::out);
+		if (obj2.is_open())
+		{
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password << '\n' << "Name:\n" << name << '\n' << "Surename:\n" << surename << '\n' << "Fathername:\n" << fathername << '\n' << "Adress:\n" << adress << '\n' << "Phone:\n" << to_string(phone);
+		}
+		obj2.close();
+		cout << "SUCCES\n";
+	}
+	void set_fathername(string fathername1) {
+		fathername = fathername1;
+		fs::remove_all("Users/User" + to_string(numberOfStudent) + "/info.txt");
+		fstream obj2("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::out);
+		if (obj2.is_open())
+		{
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password << '\n' << "Name:\n" << name << '\n' << "Surename:\n" << surename << '\n' << "Fathername:\n" << fathername << '\n' << "Adress:\n" << adress << '\n' << "Phone:\n" << to_string(phone);
+		}
+		obj2.close();
+		cout << "SUCCES\n";
+	}
+	void set_adress(string adress1) {
+		adress = adress1;
+		fs::remove_all("Users/User" + to_string(numberOfStudent) + "/info.txt");
+		fstream obj2("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::out);
+		if (obj2.is_open())
+		{
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password << '\n' << "Name:\n" << name << '\n' << "Surename:\n" << surename << '\n' << "Fathername:\n" << fathername << '\n' << "Adress:\n" << adress << '\n' << "Phone:\n" << to_string(phone);
+		}
+		obj2.close();
+		cout << "SUCCES\n";
+	}
+	void set_phone(int phone1) {
+		phone = phone1;
+		fs::remove_all("Users/User" + to_string(numberOfStudent) + "/info.txt");
+		fstream obj2("Users/User" + to_string(numberOfStudent) + "/info.txt", ios::out);
+		if (obj2.is_open())
+		{
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password << '\n' << "Name:\n" << name << '\n' << "Surename:\n" << surename << '\n' << "Fathername:\n" << fathername << '\n' << "Adress:\n" << adress << '\n' << "Phone:\n" << to_string(phone);
+		}
+		obj2.close();
+		cout << "SUCCES\n";
+	}
 	//////////////////////////////////////////////////////////////////////////////////////////
 	void passTheTest(int nOfTest, int nOfNowQuest = 1,int nowCorrect = 0) {
 		int correct = nowCorrect;
@@ -282,7 +356,180 @@ public:
 
 
 
+class Admin
+{
+private:
+	string login;
+	string password;
+public:
+	Admin(string login1, string password1) {
+		login = login1;
+		password = "";
+		for (char simv : password1)
+		{
+			int nOfSimv = simv;
+			password += static_cast<char>(nOfSimv + 5);
+		}
+		if (!fs::exists("Admin")) {
+			fs::create_directory("Admin");
+		}
+		fstream obj2("Admin/info.txt", ios::out);
+		if (obj2.is_open())
+		{
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password;
+		}
+		obj2.close();
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////
+	void set_own_login(string login1) {
+		while (true) {
+			string prom;
+			cout << "Password:\n";
+			cin >> prom;
+			if (prom == password) {
+				break;
+			}
+		}
+		login = login1;
+		fs::remove_all("Admin/info.txt");
+		fstream obj2("Admin/info.txt", ios::out);
+		if (obj2.is_open())
+		{
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password;
+		}
+		obj2.close();
+		cout << "SUCCES\n";
+	}
+	void set_own_password(string password1) {
+		while (true) {
+			string prom;
+			cout << "Password(old):\n";
+			cin >> prom;
+			if (prom == password) {
+				break;
+			}
+		}
+		password = "";
+		for (char simv : password1)
+		{
+			int nOfSimv = simv;
+			password += static_cast<char>(nOfSimv + 5);
+		}
+		fs::remove_all("Admin/info.txt");
+		fstream obj2("Admin/info.txt", ios::out);
+		if (obj2.is_open())
+		{
+			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password;
+		}
+		obj2.close();
+		cout << "SUCCES\n";
+	}
+	void makeNewUser(User *user) {
+		string mail1;
+		cout << "E-mail:\n";
+		cin >> mail1;
 
+		string password1;
+		cout << "Password:\n";
+		cin >> password1;
+
+		string name1;
+		cout << "Name:\n";
+		cin >> name1;
+
+		string surename1;
+		cout << "Surename:\n";
+		cin >> surename1;
+
+		string fathername1;
+		cout << "Fathername:\n";
+		cin >> fathername1;
+
+		string adress1;
+		cout << "Adress:\n";
+		cin >> adress1;
+
+		int number;
+		cout << "Phone:\n";
+		cin >> number;
+
+		string nameOfMark1;
+		cout << "NameOfMark1:\n";
+		cin >> nameOfMark1;
+
+		user = new User(mail1, password1, name1, surename1, fathername1, adress1, number);
+	}
+	void delUser(User* user) {
+		delete user;
+		user = nullptr;
+	}
+	void edit(User* user){
+		while (true) {
+			int choise;
+			cout << "|||||||||||||||||||||||||||||||||||||\n";
+			cout << "|  1-E-mail                         |\n";
+			cout << "|  2-password                       |\n";
+			cout << "|  3-name                           |\n";
+			cout << "|  4-surename                       |\n";
+			cout << "|  5-fathername                     |\n";
+			cout << "|  6-adress                         |\n";
+			cout << "|  7-phone                          |\n";
+			cout << "|  0-exit                           |\n";
+			cout << "|||||||||||||||||||||||||||||||||||||\n";
+			if (choise == 0) {
+				break;
+			}
+			string mail1;
+			string password1;
+			string name1;
+			string surename1;
+			string fathername1;
+			string adress1;
+			int number;
+			switch (choise)
+			{
+				case 1:
+					cout << "E-mail:\n";
+					cin >> mail1;
+					user->set_login(mail1);
+					break;
+				case 2:
+					cout << "Password:\n";
+					cin >> password1;
+					user->set_password(password1);
+					break;
+				case 3:
+					cout << "Name:\n";
+					cin >> name1;
+					user->set_name(name1);
+					break;
+				case 4:
+					cout << "Surename:\n";
+					cin >> surename1;
+					user->set_surename(surename1);
+					break;
+				case 5:
+					cout << "Fathername:\n";
+					cin >> fathername1;
+					user->set_fathername(fathername1);
+					break;
+				case 6:
+					cout << "Adress:\n";
+					cin >> adress1;
+					user->set_adress(adress1);
+					break;
+				case 7:
+					cout << "Phone:\n";
+					cin >> number;
+					user->set_phone(number);
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+};
 
 
 
@@ -290,7 +537,9 @@ public:
 int main()
 {
 	srand(time(0));	
-	User user1("qwerty@dmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535,"Oleg`sMarks");
-	user1.passTheTest(1);
+	/*User* user;
+	makeNewUser(&user);*/
+	User* user1 = new User("qwerty@gmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535);
+	user1->passTheTest(1);
 	/*user1.passTheTest(1);*/
 }
