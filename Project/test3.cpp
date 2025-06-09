@@ -686,6 +686,85 @@ public:
 		}
 		obj2.close();
 	}
+	void addCategory(string nameOfCategory, string *&categoryArr,int *siz) {
+		string* categoryArrCopy = new string[*siz];
+		for (int i = 0; i < *siz; i++)
+		{
+			categoryArrCopy[i] = categoryArr[i];
+		}
+		delete[] categoryArr;
+		*siz += 1;
+		categoryArr = new string[*siz];
+		for (int i = 0; i < *siz; i++)
+		{
+			if (i == *siz - 1) {
+				categoryArr[i] = nameOfCategory;
+			}
+			else {
+				categoryArr[i] = categoryArrCopy[i];
+			}
+		}
+		delete[] categoryArrCopy;
+	}
+	void addTest(int category,string name) {
+		int n = 1;
+		string prom;
+		while (true) {
+			prom = "Tests/Test" + to_string(n);
+			if (!fs::exists(prom)) {
+				fs::create_directory(prom);
+				break;
+			}
+		}
+		fstream obj1("Tests/Test" + to_string(n)+"/name.txt", ios::out);
+		if (obj1.is_open()) {
+			obj1 << category << ',' << name;
+		}
+		obj1.close();
+		int num = 1;
+		while (true) {
+			fstream obj2("Tests/Test" + to_string(n) + "/question"+ to_string(num) +".txt", ios::out);
+			if (obj2.is_open()) {
+				string question;
+				cout << "|||||||||||||||||||||||||||||||||||||\n";
+				cout << "|  question:                        |\n";
+				getline(cin, question);
+				obj2 << question << "\n"; 
+				int x = 1;
+				while (true) {
+					string variant;
+					cout << "|  variant:                         |\n";
+					getline(cin, variant);
+					obj2 << static_cast<char>(x + 96) << ")"<< variant<<'\n';
+					x++;
+					int choise;                                  
+					cout << "|  1-exit                           |\n";
+					cin >> choise;
+					if (choise == 1) {
+						break;
+					}
+				}
+				while(true){
+					char correctAnsw;
+					cout << "|  correctAnsw:                     |\n";
+					cin >> correctAnsw;
+					if (int(correctAnsw) >= 97 && int(correctAnsw) <= 122) {
+						obj2 << correctAnsw << '\n';
+						break;
+					}
+				}
+				int choise;
+				cout << "|  1-exit                           |\n";
+				cin >> choise;
+				cout << "|||||||||||||||||||||||||||||||||||||\n";
+				if (choise == 1) {
+					break;
+				}
+			}
+			obj2.close();
+			num++;
+		}
+	}
 
 };
 
@@ -695,12 +774,19 @@ public:
 int main()
 {
 	srand(time(0));	
-	int catSiz = 1;
-	string* categoryArr = new string[catSiz];
-	categoryArr[0] = "foreign language";
-	/*User* user;
-	makeNewUser(&user);*/
-	User* user1 = new User("qwerty@gmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535);
-	user1->passTheTest(1);
-	/*user1.passTheTest(1);*/
+	
+	string x;
+	cin >> x;
+	for (char t : x)
+	{
+		cout << t;
+	}
+	//int catSiz = 1;
+	//string* categoryArr = new string[catSiz];
+	//categoryArr[0] = "foreign language";
+	///*User* user;
+	//makeNewUser(&user);*/
+	//User* user1 = new User("qwerty@gmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535);
+	//user1->passTheTest(1);
+	///*user1.passTheTest(1);*/
 }
