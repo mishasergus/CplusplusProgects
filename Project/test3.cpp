@@ -728,12 +728,14 @@ public:
 				string question;
 				cout << "|||||||||||||||||||||||||||||||||||||\n";
 				cout << "|  question:                        |\n";
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				getline(cin, question);
 				obj2 << question << "\n"; 
 				int x = 1;
 				while (true) {
 					string variant;
 					cout << "|  variant:                         |\n";
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					getline(cin, variant);
 					obj2 << static_cast<char>(x + 96) << ")"<< variant<<'\n';
 					x++;
