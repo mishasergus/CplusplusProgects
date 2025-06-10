@@ -715,6 +715,7 @@ public:
 				fs::create_directory(prom);
 				break;
 			}
+			n++;
 		}
 		fstream obj1("Tests/Test" + to_string(n)+"/name.txt", ios::out);
 		if (obj1.is_open()) {
@@ -767,7 +768,110 @@ public:
 			num++;
 		}
 	}
+	void addQuestion(int testNum) {
+		int n = 1;
+		string prom;
+		while (true) {
+			prom = "Tests/Test" + to_string(testNum) + "/question" + to_string(n) + ".txt";
+			if (!fs::exists(prom)) {
+				break;
+			}
+			n++;
+		}
+		while (true) {
+			fstream obj2("Tests/Test" + to_string(testNum) + "/question" + to_string(n) + ".txt", ios::out);
+			if (obj2.is_open()) {
+				string question;
+				cout << "|||||||||||||||||||||||||||||||||||||\n";
+				cout << "|  question:                        |\n";
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				getline(cin, question);
+				obj2 << question << "\n";
+				int x = 1;
+				while (true) {
+					string variant;
+					cout << "|  variant:                         |\n";
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					getline(cin, variant);
+					obj2 << static_cast<char>(x + 96) << ")" << variant << '\n';
+					x++;
+					int choise;
+					cout << "|  1-exit                           |\n";
+					cin >> choise;
+					if (choise == 1) {
+						break;
+					}
+				}
+				while (true) {
+					char correctAnsw;
+					cout << "|  correctAnsw:                     |\n";
+					cin >> correctAnsw;
+					if (int(correctAnsw) >= 97 && int(correctAnsw) <= 122) {
+						obj2 << correctAnsw << '\n';
+						break;
+					}
+				}
+				int choise;
+				cout << "|  1-exit                           |\n";
+				cin >> choise;
+				cout << "|||||||||||||||||||||||||||||||||||||\n";
+				if (choise == 1) {
+					break;
+				}
+			}
+			obj2.close();
+			n++;
+		}
+	}
+	void addCorrectAnsw(int testNum,int questionNum,char correctAnsw) {
+		fstream obj2("Tests/Test" + to_string(testNum) + "/question" + to_string(questionNum) + ".txt", ios::in);
+		string t;
+		int siz = 0;
+		int y = -2;
+		string* text = new string[siz];
+		if (obj2.is_open()) {
+			for (;getline(obj2, t);)
+			{
+				y++;
+				string* textCopy = new string[siz];
+				for (int i = 0;i < siz;i++) {
+					textCopy[i] = text[i];
+				}
+				siz++;
+				delete[]text;
+				text = new string[siz];
+				for (int i = 0;i < siz;i++) {
+					
+					if (i == siz - 1) {
+						text[i] = t + "\n";
+					}
+					else {
+						text[i] = textCopy[i];
+					}
+				}
+				delete[]textCopy;
+			}
+		}
+		obj2.close();
+		if (int(correctAnsw) >= 97 && int(correctAnsw) <= 96 + y) {
+			fs::remove_all("Tests/Test" + to_string(testNum) + "/question" + to_string(questionNum) + ".txt");
+			fstream obj1("Tests/Test" + to_string(testNum) + "/question" + to_string(questionNum) + ".txt", ios::out);
+			if (obj1.is_open()) {
+				for (int i = 0; i < siz; i++)
+				{
+					if (i != siz - 1) {
+						obj1 << text[i];
+					}
+					else {
+						obj1 << correctAnsw + '\n';
 
+					}
+				}
+			}
+			obj1.close();
+		}
+		delete[] text;
+	}
 };
 
 
@@ -777,12 +881,6 @@ int main()
 {
 	srand(time(0));	
 	
-	string x;
-	cin >> x;
-	for (char t : x)
-	{
-		cout << t;
-	}
 	//int catSiz = 1;
 	//string* categoryArr = new string[catSiz];
 	//categoryArr[0] = "foreign language";
