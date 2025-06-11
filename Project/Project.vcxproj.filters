@@ -103,6 +103,9 @@
     <Filter Include="Hw\Hw15">
       <UniqueIdentifier>{ad5e3d35-d09e-45ed-953e-2d192eb92216}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Cw\Cw16">
+      <UniqueIdentifier>{fcf9038b-3c07-47c0-b20d-bf0d35b094c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Hw1_1.cpp">
@@ -206,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="test3.cpp">
       <Filter>Cw\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Cw16_1.cpp">
+      <Filter>Cw\Cw16</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

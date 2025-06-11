@@ -57,7 +57,7 @@ public:
 		}
 		obj2.close();
 	}
-	//////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////
 	string get_login() {
 		fstream obj1("Users/User" + to_string(numberOfStudent)+ "/info.txt", ios::in);
 		string txt = "";
@@ -176,7 +176,7 @@ public:
 		}
 		return "";
 	}
-	//////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////
 	void set_login(string login1) {
 		login = login1;
 		fs::remove_all("Users/User" + to_string(numberOfStudent) + "/info.txt");
@@ -259,7 +259,7 @@ public:
 		obj2.close();
 		cout << "SUCCES\n";
 	}
-	//////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////
 	void passTheTest(int nOfTest, int nOfNowQuest = 1,int nowCorrect = 0) {
 		int correct = nowCorrect;
 		int n = 1;
@@ -381,7 +381,7 @@ public:
 		}
 		obj2.close();
 	}
-	//////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////
 	void set_own_login(string login1) {
 		string passw = "";
 		for (char simv : password) {
@@ -706,67 +706,141 @@ public:
 		}
 		delete[] categoryArrCopy;
 	}
-	void addTest(int category,string name) {
-		int n = 1;
-		string prom;
-		while (true) {
-			prom = "Tests/Test" + to_string(n);
-			if (!fs::exists(prom)) {
-				fs::create_directory(prom);
-				break;
+	void addTest(int category,string name,string path = "") {
+		if (path == "") {
+			int n = 1;
+			string prom;
+			while (true) {
+				prom = "Tests/Test" + to_string(n);
+				if (!fs::exists(prom)) {
+					fs::create_directory(prom);
+					break;
+				}
+				n++;
 			}
-			n++;
-		}
-		fstream obj1("Tests/Test" + to_string(n)+"/name.txt", ios::out);
-		if (obj1.is_open()) {
-			obj1 << category << ',' << name;
-		}
-		obj1.close();
-		int num = 1;
-		while (true) {
-			fstream obj2("Tests/Test" + to_string(n) + "/question"+ to_string(num) +".txt", ios::out);
-			if (obj2.is_open()) {
-				string question;
-				cout << "|||||||||||||||||||||||||||||||||||||\n";
-				cout << "|  question:                        |\n";
-				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				getline(cin, question);
-				obj2 << question << "\n"; 
-				int x = 1;
-				while (true) {
-					string variant;
-					cout << "|  variant:                         |\n";
+			fstream obj1("Tests/Test" + to_string(n) + "/name.txt", ios::out);
+			if (obj1.is_open()) {
+				obj1 << category << ',' << name;
+			}
+			obj1.close();
+			int num = 1;
+			while (true) {
+				fstream obj2("Tests/Test" + to_string(n) + "/question" + to_string(num) + ".txt", ios::out);
+				if (obj2.is_open()) {
+					string question;
+					cout << "|||||||||||||||||||||||||||||||||||||\n";
+					cout << "|  question:                        |\n";
 					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-					getline(cin, variant);
-					obj2 << static_cast<char>(x + 96) << ")"<< variant<<'\n';
-					x++;
-					int choise;                                  
+					getline(cin, question);
+					obj2 << question << "\n";
+					int x = 1;
+					while (true) {
+						string variant;
+						cout << "|  variant:                         |\n";
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+						getline(cin, variant);
+						obj2 << static_cast<char>(x + 96) << ")" << variant << '\n';
+						x++;
+						int choise;
+						cout << "|  1-exit                           |\n";
+						cin >> choise;
+						if (choise == 1) {
+							break;
+						}
+					}
+					while (true) {
+						char correctAnsw;
+						cout << "|  correctAnsw:                     |\n";
+						cin >> correctAnsw;
+						if (int(correctAnsw) >= 97 && int(correctAnsw) <= 122) {
+							obj2 << correctAnsw << '\n';
+							break;
+						}
+					}
+					int choise;
 					cout << "|  1-exit                           |\n";
 					cin >> choise;
+					cout << "|||||||||||||||||||||||||||||||||||||\n";
 					if (choise == 1) {
 						break;
 					}
 				}
-				while(true){
-					char correctAnsw;
-					cout << "|  correctAnsw:                     |\n";
-					cin >> correctAnsw;
-					if (int(correctAnsw) >= 97 && int(correctAnsw) <= 122) {
-						obj2 << correctAnsw << '\n';
-						break;
-					}
-				}
-				int choise;
-				cout << "|  1-exit                           |\n";
-				cin >> choise;
-				cout << "|||||||||||||||||||||||||||||||||||||\n";
-				if (choise == 1) {
+				obj2.close();
+				num++;
+			}
+		}
+		else if(fs::exists(path)&& fs::exists(path + "/question" + to_string(1) + ".txt")){
+			int n = 1;
+			string prom;
+			while (true) {
+				prom = "Tests/Test" + to_string(n);
+				if (!fs::exists(prom)) {
+					fs::create_directory(prom);
 					break;
 				}
+				n++;
 			}
-			obj2.close();
-			num++;
+			fstream obj1("Tests/Test" + to_string(n) + "/name.txt", ios::out);
+			if (obj1.is_open()) {
+				obj1 << category << ',' << name;
+			}
+			obj1.close();
+			int nq = 1;
+			while (fs::exists("Tests/Test" + to_string(n))) {
+				if(fs::exists(path+"/question"+to_string(nq)+".txt")){
+					fstream obj2(path + "/question" + to_string(nq) + ".txt", ios::in);
+					fstream obj3("Tests/Test"+to_string(n)+"/question" + to_string(nq) + ".txt", ios::out);
+					if (obj2.is_open() && obj3.is_open()) {
+						string txt = "";
+						int nx2 = 0;
+						for (;getline(obj2, txt);)
+						{
+							nx2++;
+						}
+						int nx3 = 1;
+						obj2.seekg(0);
+						for (;getline(obj2, txt);)
+						{
+							if (nx3 != 1 && nx3 != nx2) {
+								if (int(txt[0]) == nx3 + 95) {
+									obj3 << txt << '\n';// всі ряд з варіантами відп
+								}
+								else {
+									obj3.close();
+									obj2.close();
+									fs::remove_all("Tests/Test" + to_string(n));
+									break;
+								}
+							}
+							else if (nx3 == nx2) {
+								if (int(txt[0]) >= 97 && int(txt[0]) <= nx3 + 95 - 1 && size(txt) == 1) {
+									obj3 << txt << '\n';// кінцевий ряд з варіантами відп
+								}
+								else {
+									obj3.close();
+									obj2.close();
+									fs::remove_all("Tests/Test" + to_string(n));
+									break;
+								}
+							}
+							else {
+								obj3 << txt << '\n';// 1ряд з питанням
+							}
+							nx3++;
+
+						}
+					}
+					obj3.close();
+					obj2.close();
+				}
+				else
+				{
+					break;
+				}
+				nq++;
+			}
 		}
+		
 	}
 	void addQuestion(int testNum) {
 		int n = 1;
@@ -881,12 +955,12 @@ int main()
 {
 	srand(time(0));	
 	
-	//int catSiz = 1;
-	//string* categoryArr = new string[catSiz];
-	//categoryArr[0] = "foreign language";
-	///*User* user;
-	//makeNewUser(&user);*/
-	//User* user1 = new User("qwerty@gmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535);
-	//user1->passTheTest(1);
-	///*user1.passTheTest(1);*/
+	int catSiz = 1;
+	string* categoryArr = new string[catSiz];
+	categoryArr[0] = "foreign language";
+	/*User* user;
+	makeNewUser(&user);*/
+	User* user1 = new User("qwerty@gmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535);
+	user1->passTheTest(1);
+	/*user1.passTheTest(1);*/
 }
