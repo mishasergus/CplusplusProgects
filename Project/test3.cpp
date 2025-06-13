@@ -58,6 +58,12 @@ public:
 		obj2.close();
 	}
 	////////////////////////////////////////////////////////////////////////////////////////
+	string* gettestBase() {
+		return testBase;
+	}
+	int gettestBaseSiz() {
+		return baseSiz;
+	}
 	string get_login() {
 		fstream obj1("Users/User" + to_string(numberOfStudent)+ "/info.txt", ios::in);
 		string txt = "";
@@ -317,7 +323,7 @@ public:
 							testBase = new string[baseSiz];
 							for (int j = 0;j < baseSiz;j++) {
 								if (j == baseSiz - 1) {
-									testBase[j] = to_string(nOfTest) + " " + to_string(j) + " " + to_string(correct) + " ";
+									testBase[j] = to_string(nOfTest) + " " + to_string(i) + " " + to_string(correct);
 								}
 								else {
 									testBase[j] = testBaseCopy[j];
@@ -386,11 +392,17 @@ private:
 	string login;
 	string password;
 	int userSiz = 0;
-	User* userArr = new User[userSiz];
+	User* userArr;
 	int catSiz = 1;
-	string* categoryArr = new string[catSiz];
+	string* categoryArr;
+	int namesTestSiz = 1;
+	string* namesOfTests;
 public:
 	Admin(string login1, string password1) {
+		userArr = new User[userSiz];
+		categoryArr = new string[catSiz];
+		namesOfTests = new string[catSiz];
+		namesOfTests[0] = "EnglishTest";
 		categoryArr[0] = "foreign language";
 		login = login1;
 		password = "";
@@ -409,11 +421,17 @@ public:
 		}
 		obj2.close();
 	}
+	int get_nameTest_siz() {
+		return namesTestSiz;
+	}
 	int get_userArr_siz() {
 		return userSiz;
 	}
 	int get_categoryArr_siz() {
 		return catSiz;
+	}
+	string* get_namesOfTests() {
+		return namesOfTests;
 	}
 	User* get_userArr() {
 		return userArr;
@@ -602,56 +620,53 @@ public:
 			cout << "|  7-phone                          |\n";
 			cout << "|  0-exit                           |\n";
 			cout << "|||||||||||||||||||||||||||||||||||||\n";
-			if (choise == 0) {
-				break;
-			}
+			cin >> choise;
 			string mail1;
 			string password1;
 			string name1;
 			string surename1;
 			string fathername1;
 			string adress1;
-			int number;
-			switch (choise)
-			{
-				case 1:
-					cout << "E-mail:\n";
-					cin >> mail1;
-					userArr[number - 1].set_login(mail1);
-					break;
-				case 2:
-					cout << "Password:\n";
-					cin >> password1;
-					userArr[number - 1].set_password(password1);
-					break;
-				case 3:
-					cout << "Name:\n";
-					cin >> name1;
-					userArr[number - 1].set_name(name1);
-					break;
-				case 4:
-					cout << "Surename:\n";
-					cin >> surename1;
-					userArr[number - 1].set_surename(surename1);
-					break;
-				case 5:
-					cout << "Fathername:\n";
-					cin >> fathername1;
-					userArr[number - 1].set_fathername(fathername1);
-					break;
-				case 6:
-					cout << "Adress:\n";
-					cin >> adress1;
-					userArr[number - 1].set_adress(adress1);
-					break;
-				case 7:
-					cout << "Phone:\n";
-					cin >> number;
-					userArr[number - 1].set_phone(number);
-					break;
-				default:
-					break;
+			int numberPh;
+			if (choise == 0) {
+				break;
 			}
+			else if (choise == 1) {
+				cout << "E-mail:\n";
+				cin >> mail1;
+				userArr[number - 1].set_login(mail1);
+			}
+			else if (choise == 2) {
+				cout << "Password:\n";
+				cin >> password1;
+				userArr[number - 1].set_password(password1);
+			}
+			else if (choise == 3) {
+				cout << "Name:\n";
+				cin >> name1;
+				userArr[number - 1].set_name(name1);
+			}
+			else if (choise == 4) {
+				cout << "Surename:\n";
+				cin >> surename1;
+				userArr[number - 1].set_surename(surename1);
+			}
+			else if (choise == 5) {
+				cout << "Fathername:\n";
+				cin >> fathername1;
+				userArr[number - 1].set_fathername(fathername1);
+			}
+			else if (choise == 6) {
+				cout << "Adress:\n";
+				cin >> adress1;
+				userArr[number - 1].set_adress(adress1);
+			}
+			else if (choise == 7) {
+				cout << "Phone:\n";
+				cin >> numberPh;
+				userArr[number - 1].set_phone(numberPh);
+			}
+
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -821,6 +836,25 @@ public:
 			fstream obj1("Tests/Test" + to_string(n) + "/name.txt", ios::out);
 			if (obj1.is_open()) {
 				obj1 << category << ',' << name;
+				string* namesOfTestsCopy = new string[namesTestSiz];
+				for (int i = 0; i < namesTestSiz; i++)
+				{
+
+					namesOfTestsCopy[i] = namesOfTests[i];
+				}
+				delete[] namesOfTests;
+				namesTestSiz += 1;
+				namesOfTests = new string[namesTestSiz];
+				for (int i = 0; i < namesTestSiz; i++)
+				{
+					if (i == catSiz - 1) {
+						namesOfTests[i] = name;
+					}
+					else {
+						namesOfTests[i] = namesOfTestsCopy[i];
+					}
+				}
+				delete[] namesOfTestsCopy;
 			}
 			obj1.close();
 			int num = 1;
@@ -883,6 +917,25 @@ public:
 			fstream obj1("Tests/Test" + to_string(n) + "/name.txt", ios::out);
 			if (obj1.is_open()) {
 				obj1 << category << ',' << name;
+				string* namesOfTestsCopy = new string[namesTestSiz];
+				for (int i = 0; i < namesTestSiz; i++)
+				{
+
+					namesOfTestsCopy[i] = namesOfTests[i];
+				}
+				delete[] namesOfTests;
+				namesTestSiz += 1;
+				namesOfTests = new string[namesTestSiz];
+				for (int i = 0; i < namesTestSiz; i++)
+				{
+					if (i == catSiz - 1) {
+						namesOfTests[i] = name;
+					}
+					else {
+						namesOfTests[i] = namesOfTestsCopy[i];
+					}
+				}
+				delete[] namesOfTestsCopy;
 			}
 			obj1.close();
 			int nq = 1;
@@ -1104,47 +1157,160 @@ int main()
 						admin.set_own_password(adminpassword);
 					}
 					else if (choise2 == 3) {
-						int choise3;
-						cout << "|  1-make new user                  |\n";
-						cout << "|  2-edit user                      |\n";
-						cout << "|  3-del user                       |\n";
-						cout << "|  4-exit                           |\n";
-						cin >> choise3;
-						cout << "|||||||||||||||||||||||||||||||||||||\n";
-						if (choise3 == 4) {
-							break;
-						}
-						else if (choise3 == 1) {
-							User* user;
-							admin.makeNewUser(user);
-						}
-						else if (choise3 == 2) {
-							int num;
-							cout << "|  User number(not index):          |\n";
-							cin >> num;
-							admin.edit(num);
-						}
-						else if (choise3 == 3) {
-							int num;
-							cout << "|  User number(not index):          |\n";
-							cin >> num;
-							admin.delUser(num);
+						while (true) {
+							int choise3;
+							cout << "|  1-make new user                  |\n";
+							cout << "|  2-edit user                      |\n";
+							cout << "|  3-del user                       |\n";
+							cout << "|  4-exit                           |\n";
+							cin >> choise3;
+							cout << "|||||||||||||||||||||||||||||||||||||\n";
+							if (choise3 == 4) {
+								break;
+							}
+							else if (choise3 == 1) {
+								User* user;
+								admin.makeNewUser(user);
+							}
+							else if (choise3 == 2) {
+								int num;
+								cout << "|  User number(not index):          |\n";
+								cin >> num;
+								admin.edit(num);
+							}
+							else if (choise3 == 3) {
+								int num;
+								cout << "|  User number(not index):          |\n";
+								cin >> num;
+								admin.delUser(num);
+							}
 						}
 					}
 					else if (choise2 == 4) {
-						int choise3;
-						cout << "|  1-alll marks                     |\n";
-						cout << "|  2-marks by category              |\n";
-						cout << "|  3-del user                       |\n";
-						cout << "|  4-exit                           |\n";
-						cin >> choise3;
-						cout << "|||||||||||||||||||||||||||||||||||||\n";
-						if (choise3 == 4) {
-							break;
+						while (true) {
+							int choise3;
+							cout << "|  1-all marks                      |\n";
+							cout << "|  2-marks by category              |\n";
+							cout << "|  3-marks by test                  |\n";
+							cout << "|  4-marks by user                  |\n";
+							cout << "|  5-exit                           |\n";
+							cin >> choise3;
+							cout << "|||||||||||||||||||||||||||||||||||||\n";
+							if (choise3 == 5) {
+								break;
+							}
+							else if (choise3 == 1) {
+								admin.showAllMarks();
+							}
+							else if (choise3 == 2) {
+								int category;
+								for (int i = 0; i < admin.get_categoryArr_siz(); i++)
+								{
+									cout << "  " << i << "-" << admin.get_categoryArr()[i] << '\n';
+								}
+								cout << "|  Category:                        |\n";
+								cin >> category;
+								admin.showMarksByCategory(category);
+							}
+							else if (choise3 == 3) {
+								int numbOfTest;
+								for (int i = 0; i < admin.get_nameTest_siz(); i++)
+								{
+									cout << "  " << i << "-" << admin.get_namesOfTests()[i] << '\n';
+								}
+								cout << "|  numbOfTest:                      |\n";
+								cin >> numbOfTest;
+								admin.showMarksByTest(admin.get_namesOfTests()[numbOfTest]);
+							}
+							else if (choise3 == 4) {
+								int nOfUser;
+								cout << "|  nOfUser:                         |\n";
+								cout << " " << admin.get_userArr_siz() << "-max\n";
+								cin >> nOfUser;
+								admin.showMarksByUser(nOfUser);
+							}
 						}
 					}
 					else if (choise2 == 5) {
-
+						while (true) {
+							int choise3;
+							cout << "|  1-add test                       |\n";
+							cout << "|  2-add category                   |\n";
+							cout << "|  3-add question                   |\n";
+							cout << "|  4-change correct question        |\n";
+							cout << "|  5-exit                           |\n";
+							cin >> choise3;
+							cout << "|||||||||||||||||||||||||||||||||||||\n";
+							if (choise3 == 5) {
+								break;
+							}
+							else if (choise3 == 1) {
+								int category;
+								for (int i = 0; i < admin.get_categoryArr_siz(); i++)
+								{
+									cout << "  " << i << "-" << admin.get_categoryArr()[i] << '\n';
+								}
+								cout << "|  Category:                        |\n";
+								cin >> category;
+								string name;
+								cout << "|  Name:                            |\n";
+								cin >> name;
+								int cho;
+								cout << "|  Do u want to write path(1-Yes):  |\n";
+								cin >> cho;
+								if (cho == 1){
+									string path;
+									cout << "|  Path:                            |\n";
+									cin >> path;
+									admin.addTest(category, name, path);
+								}
+								else {
+									admin.addTest(category, name);
+								}
+							}
+							else if (choise3 == 2) {
+								string name;
+								cout << "|  Name:                            |\n";
+								cin >> name;
+								admin.addCategory(name);
+							}
+							else if (choise3 == 3) {
+								int numbOfTest;
+								for (int i = 0; i < admin.get_nameTest_siz(); i++)
+								{
+									cout << "  " << i << "-" << admin.get_namesOfTests()[i] << '\n';
+								}
+								cout << "|  numbOfTest:                      |\n";
+								cin >> numbOfTest;
+								admin.addQuestion(numbOfTest);
+							}
+							else if (choise3 == 4) {
+								int numbOfTest;
+								for (int i = 0; i < admin.get_nameTest_siz(); i++)
+								{
+									cout << "  " << i << "-" << admin.get_namesOfTests()[i] << '\n';
+								}
+								cout << "|  numbOfTest:                      |\n";
+								cin >> numbOfTest;
+								int n = 1;
+								string prom;
+								while (true) {
+									prom = "Tests/Test" + to_string(numbOfTest) + "/question" + to_string(n) + ".txt";
+									if (!fs::exists(prom)) {
+										break;
+									}
+									n++;
+								}
+								int qwNum;
+								cout << "|  numbOfQuestion:                  |\n";
+								cout << " " << n << "-max\n";
+								cin >> qwNum;
+								char correct;
+								cout << "|  correct answer(only one):        |\n";
+								cin >> correct;
+								admin.addCorrectAnsw(numbOfTest, qwNum, correct);
+							}
+						}
 					}
 				}
 			}
@@ -1160,16 +1326,71 @@ int main()
 				if (login == admin.get_userArr()[i].get_login() && password == admin.get_userArr()[i].get_password()) {
 					cout << "|  WELLCOME                         |\n";
 					while (true) {
-
+						int choise2;
+						cout << "|  1-pass test                      |\n";
+						cout << "|  2-continue test                  |\n";
+						cout << "|  3-exit                           |\n";
+						cin >> choise2;
+						cout << "|||||||||||||||||||||||||||||||||||||\n";
+						if (choise2 == 3) {
+							break;
+						}
+						else if (choise2 == 1) {
+							int numbOfTest;
+							for (int j = 0; j < admin.get_nameTest_siz(); j++)
+							{
+								cout << "  " << j << "-" << admin.get_namesOfTests()[j] << '\n';
+							}
+							cout << "|  numbOfTest:                      |\n";
+							cin >> numbOfTest;
+							admin.get_userArr()[i].passTheTest(numbOfTest);
+						}
+						else if (choise2 == 2) {
+							int nOfSmth;
+							cout << "NOfTest|NOfQw|Corrects\n";
+							for (int j = 0; j < admin.get_userArr()[i].gettestBaseSiz(); j++)
+							{
+								cout << admin.get_userArr()[i].gettestBase()[j]<<"-"<<j<<'\n';
+							}
+							cin >> nOfSmth;
+							string c = admin.get_userArr()[i].gettestBase()[nOfSmth];
+							int ind1;
+							int ind2;
+							for (int j = 0; j < size(c); j++)
+							{
+								if (c[j] == ' ') {
+									ind1 = j;
+									break;
+								}
+							}
+							for (int j = ind1+1; j < size(c); j++)
+							{
+								if (c[j] == ' ') {
+									ind2 = j;
+									break;
+								}
+							}
+							int nOfTest = 0;
+							for (int j = 0; j < ind1; j++)
+							{
+								nOfTest += (int(c[j]) - 48) * pow(10, ind1 - 1 - j);
+							}
+							int nOfQw = 0;
+							for (int j = ind1 + 1; j < ind2; j++)
+							{
+								nOfQw += (int(c[j]) - 48) * pow(10, ind2 - 1 - j);
+							}
+							int nOfCorr = 0;
+							for (int j = ind2 + 1; j < size(c); j++)
+							{
+								nOfCorr += (int(c[j]) - 48) * pow(10, size(c) - 1 - j);
+							}
+							admin.get_userArr()[i].passTheTest(nOfTest, nOfQw, nOfCorr);
+						}
 					}
 					break;
 				}
 			}
 		}								
 	}
-	/*User* user;
-	makeNewUser(&user);*/
-	User* user1 = new User("qwerty@gmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535);
-	user1->passTheTest(1);
-	/*user1.passTheTest(1);*/
 }
