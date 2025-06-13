@@ -354,16 +354,44 @@ public:
 		}
 	}
 };
-
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Admin
 {
 private:
 	string login;
 	string password;
+	int userSiz = 0;
+	User* userArr = new User[userSiz];
+	int catSiz = 1;
+	string* categoryArr = new string[catSiz];
 public:
 	Admin(string login1, string password1) {
+		categoryArr[0] = "foreign language";
 		login = login1;
 		password = "";
 		for (char simv : password1)
@@ -380,6 +408,56 @@ public:
 			obj2 << "Login:\n" << login << '\n' << "Password:\n" << password;
 		}
 		obj2.close();
+	}
+	int get_userArr_siz() {
+		return userSiz;
+	}
+	int get_categoryArr_siz() {
+		return catSiz;
+	}
+	User* get_userArr() {
+		return userArr;
+	}
+	User* get_categoryArr() {
+		return categoryArr;
+	}
+	string get_own_password() {
+		fstream obj1("Admin/info.txt", ios::in);
+		string txt = "";
+		bool next = false;
+		if (obj1.is_open()) {
+			while (getline(obj1, txt)) {
+				if (next) {
+					string passw = "";
+					for (char simv : txt)
+					{
+						int nOfSimv = simv;
+						passw += static_cast<char>(nOfSimv - 5);
+					}
+					return passw;
+				}
+				if (txt == "Password:") {
+					next = true;
+				}
+			}
+		}
+		return "";
+	}
+	string get_own_login() {
+		fstream obj1("Admin/info.txt", ios::in);
+		string txt = "";
+		bool next = false;
+		if (obj1.is_open()) {
+			while (getline(obj1, txt)) {
+				if (next) {
+					return txt;
+				}
+				if (txt == "Login:") {
+					next = true;
+				}
+			}
+		}
+		return "";
 	}
 	////////////////////////////////////////////////////////////////////////////////////////
 	void set_own_login(string login1) {
@@ -433,7 +511,8 @@ public:
 		obj2.close();
 		cout << "SUCCES\n";
 	}
-	void makeNewUser(User *&user, User arr[], int *size) {
+	///////////////////////////////////////////////////////////////////////////////////////////
+	void makeNewUser(User *&user) {
 		string mail1;
 		cout << "E-mail:\n";
 		cin >> mail1;
@@ -462,36 +541,55 @@ public:
 		cout << "Phone:\n";
 		cin >> number;
 
-		string nameOfMark1;
-		cout << "NameOfMark1:\n";
-		cin >> nameOfMark1;
-
 		user = new User(mail1, password1, name1, surename1, fathername1, adress1, number);
 
-		User* arrCopy = new User[*size];
-		for (int i = 0; i < *size; i++)
+		User* arrCopy = new User[userSiz];
+		for (int i = 0; i < userSiz; i++)
 		{
-			arrCopy[i] = arr[i];
+			arrCopy[i] = userArr[i];
 		}
-		*size += 1;
-		delete[]arr;
-		arr = new User[*size];
-		for (int i = 0; i < *size; i++)
+		userSiz += 1;
+		delete[]userArr;
+		userArr = new User[userSiz];
+		for (int i = 0; i < userSiz; i++)
 		{
-			if (i == *size - 1) {
-				arr[i] = *user;
+			if (i == userSiz - 1) {
+				userArr[i] = *user;
 			}
 			else {
-				arr[i] = arrCopy[i];
+				userArr[i] = arrCopy[i];
 			}
 		}
 		delete[]arrCopy;
 	}
-	void delUser(User* user) {
-		delete user;
-		user = nullptr;
+	void delUser(int numOfUser) {
+		User* arrCopy = new User[userSiz];
+		for (int i = 0; i < userSiz; i++)
+		{
+			arrCopy[i] = userArr[i];
+		}
+		userSiz -= 1;
+		delete[]userArr;
+		userArr = new User[userSiz];
+		bool prom = true;
+		for (int i = 0; i < userSiz; i++)
+		{
+			if (i == numOfUser - 1&& prom) {
+				i--;
+				prom = false;
+			}
+			else if(i >= numOfUser - 1 && !prom)
+			{
+				userArr[i] = arrCopy[i+1];
+			}
+			else {
+				userArr[i] = arrCopy[i];
+			}
+		}
+		delete[]arrCopy;
+		fs::remove_all("Users/Uset"+to_string(numOfUser));
 	}
-	void edit(User*& user){
+	void edit(int number){
 		while (true) {
 			int choise;
 			cout << "|||||||||||||||||||||||||||||||||||||\n";
@@ -519,51 +617,52 @@ public:
 				case 1:
 					cout << "E-mail:\n";
 					cin >> mail1;
-					user->set_login(mail1);
+					userArr[number - 1].set_login(mail1);
 					break;
 				case 2:
 					cout << "Password:\n";
 					cin >> password1;
-					user->set_password(password1);
+					userArr[number - 1].set_password(password1);
 					break;
 				case 3:
 					cout << "Name:\n";
 					cin >> name1;
-					user->set_name(name1);
+					userArr[number - 1].set_name(name1);
 					break;
 				case 4:
 					cout << "Surename:\n";
 					cin >> surename1;
-					user->set_surename(surename1);
+					userArr[number - 1].set_surename(surename1);
 					break;
 				case 5:
 					cout << "Fathername:\n";
 					cin >> fathername1;
-					user->set_fathername(fathername1);
+					userArr[number - 1].set_fathername(fathername1);
 					break;
 				case 6:
 					cout << "Adress:\n";
 					cin >> adress1;
-					user->set_adress(adress1);
+					userArr[number - 1].set_adress(adress1);
 					break;
 				case 7:
 					cout << "Phone:\n";
 					cin >> number;
-					user->set_phone(number);
+					userArr[number - 1].set_phone(number);
 					break;
 				default:
 					break;
 			}
 		}
 	}
-	void showAllMarks(User* arr[],int size) {
+	///////////////////////////////////////////////////////////////////////////////////////////
+	void showAllMarks() {
 		if (fs::exists("Admin/allMarks.txt")) {
 			fs::remove_all("Admin/allMarks.txt");
 		}
 		fstream obj1("Admin/allMarks.txt", ios::out);
 		if (obj1.is_open())
 		{
-			for (int i = 1; i <= size; i++)
+			for (int i = 1; i <= userSiz; i++)
 			{
 				obj1 << "User" << i << ":\n";
 				cout << "User" << i << ":\n";
@@ -581,14 +680,14 @@ public:
 		}
 		obj1.close();
 	}
-	void showMarksByCategory(User* arr[], int size,int nOfCategory) {
+	void showMarksByCategory(int nOfCategory) {
 		if (fs::exists("Admin/marksBy" + to_string(nOfCategory) + ".txt")) {
 			fs::remove_all("Admin/marksBy" + to_string(nOfCategory) + ".txt");
 		}
 		fstream obj1("Admin/marksBy" + to_string(nOfCategory) + ".txt", ios::out);
 		if (obj1.is_open())
 		{
-			for (int i = 1; i <= size; i++)
+			for (int i = 1; i <= userSiz; i++)
 			{
 				obj1 << "User" << i << ":\n";
 				cout << "User" << i << ":\n";
@@ -621,14 +720,14 @@ public:
 		}
 		obj1.close();
 	}
-	void showMarksByName(User* arr[], int size, string nameOfTest) {
+	void showMarksByTest(string nameOfTest) {
 		if (fs::exists("Admin/marksBy" + nameOfTest + ".txt")) {
 			fs::remove_all("Admin/marksBy" + nameOfTest + ".txt");
 		}
 		fstream obj1("Admin/marksBy" + nameOfTest + ".txt", ios::out);
 		if (obj1.is_open())
 		{
-			for (int i = 1; i <= size; i++)
+			for (int i = 1; i <= userSiz; i++)
 			{
 				obj1 << "User" << i << ":\n";
 				cout << "User" << i << ":\n";
@@ -665,17 +764,17 @@ public:
 		}
 		obj1.close();
 	}
-	void showMarksByUser(User* arr[], int index) {
-		if (fs::exists("Admin/marksByUser" + to_string(index) + ".txt")) {
-			fs::remove_all("Admin/marksByUser" + to_string(index) + ".txt");
+	void showMarksByUser(int number) {
+		if (fs::exists("Admin/marksByUser" + to_string(number) + ".txt")) {
+			fs::remove_all("Admin/marksByUser" + to_string(number) + ".txt");
 		}
-		fstream obj2("Admin/marksByUser" + to_string(index) + ".txt", ios::out);
+		fstream obj2("Admin/marksByUser" + to_string(number) + ".txt", ios::out);
 		if (obj2.is_open()) {
-			fstream obj1("Users/User" + to_string(index) + "/marks.txt", ios::in);
+			fstream obj1("Users/User" + to_string(number) + "/marks.txt", ios::in);
 			if (obj1.is_open())
 			{
-				obj2 << "User" << index << ":\n";
-				cout << "User" << index << ":\n";
+				obj2 << "User" << number << ":\n";
+				cout << "User" << number << ":\n";
 				string txt;
 				while (getline(obj1, txt)) {
 					obj2 << txt << "\n";
@@ -686,18 +785,19 @@ public:
 		}
 		obj2.close();
 	}
-	void addCategory(string nameOfCategory, string *&categoryArr,int *siz) {
-		string* categoryArrCopy = new string[*siz];
-		for (int i = 0; i < *siz; i++)
+	///////////////////////////////////////////////////////////////////////////////////////////
+	void addCategory(string nameOfCategory) {
+		string* categoryArrCopy = new string[catSiz];
+		for (int i = 0; i < catSiz; i++)
 		{
 			categoryArrCopy[i] = categoryArr[i];
 		}
 		delete[] categoryArr;
-		*siz += 1;
-		categoryArr = new string[*siz];
-		for (int i = 0; i < *siz; i++)
+		catSiz += 1;
+		categoryArr = new string[catSiz];
+		for (int i = 0; i < catSiz; i++)
 		{
-			if (i == *siz - 1) {
+			if (i == catSiz - 1) {
 				categoryArr[i] = nameOfCategory;
 			}
 			else {
@@ -954,10 +1054,132 @@ public:
 int main()
 {
 	srand(time(0));	
-	
-	int catSiz = 1;
-	string* categoryArr = new string[catSiz];
-	categoryArr[0] = "foreign language";
+	string adminLogin;
+	string adminpassword;
+	cout << "|||||||||||||||||||||||||||||||||||||\n";
+	cout << "|  Login:                           |\n";
+	cin >> adminLogin;
+	cout << "|  Password:                        |\n";
+	cin >> adminpassword;
+	Admin admin(adminLogin, adminpassword);
+	cout << "|||||||||||||||||||||||||||||||||||||\n";
+	while (true) {
+		int choise1;       
+		string login;
+		string password;
+		int index = 0;
+		cout << "|  1-as admin                       |\n";
+		cout << "|  2-as user                        |\n";
+		cin >> choise1;
+		cout << "|||||||||||||||||||||||||||||||||||||\n";
+		switch (choise1)
+		{
+		case 1:
+			cout << "|  Login:                           |\n";
+			cin >> login;
+			cout << "|  Password:                        |\n";
+			cin >> password;
+			cout << "|||||||||||||||||||||||||||||||||||||\n";
+			if (login == admin.get_own_login() && password == admin.get_own_password()) {
+				cout << "|  WELLCOME                         |\n";
+				while (true) {
+					int choise2;
+					cout << "|  1-set own login                  |\n";
+					cout << "|  2-set own password               |\n";
+					cout << "|  3-user control                   |\n";
+					cout << "|  4-statistic operatoins           |\n";
+					cout << "|  5-test control                   |\n";
+					cout << "|  6-exit                           |\n";
+					cin >> choise2;
+					cout << "|||||||||||||||||||||||||||||||||||||\n";
+					if (choise2 == 6) {
+						break;
+					}
+					switch (choise2)
+					{
+					case 1:
+						cout << "|  Login:                           |\n";
+						cin >> adminLogin;
+						admin.set_own_login(adminLogin);
+						break;
+					case 2:
+						cout << "|  Password:                        |\n";
+						cin >> adminpassword;
+						admin.set_own_password(adminpassword);
+						break;
+					case 3:
+						int choise3;
+						cout << "|  1-make new user                  |\n";
+						cout << "|  2-edit user                      |\n";
+						cout << "|  3-del user                       |\n";
+						cout << "|  4-exit                           |\n";
+						cin >> choise3;
+						cout << "|||||||||||||||||||||||||||||||||||||\n";
+						if (choise3 == 4) {
+							break;
+						}
+						switch (choise3)
+						{
+						case 1:
+							User * user;
+							admin.makeNewUser(user);
+							break;
+						case 2:
+							int num;                                     
+							cout << "|  User number(not index):          |\n";
+							cin >> num;
+							admin.edit(num);
+							break;
+						case 3:
+							int num;
+							cout << "|  User number(not index):          |\n";
+							cin >> num;
+							admin.delUser(num);
+							break;
+						default:
+							break;
+						}
+						break;
+					case 4:
+						int choise3;
+						cout << "|  1-alll marks                     |\n";
+						cout << "|  2-marks by category              |\n";
+						cout << "|  3-del user                       |\n";
+						cout << "|  4-exit                           |\n";
+						cin >> choise3;
+						cout << "|||||||||||||||||||||||||||||||||||||\n";
+						if (choise3 == 4) {
+							break;
+						}
+						break;
+					case 5:
+						break;
+					default:
+						break;
+					}
+				}
+			}
+			break;
+		case 2:
+			cout << "|  Login:                           |\n";
+			cin >> login;
+			cout << "|  Password:                        |\n";
+			cin >> password;
+			cout << "|||||||||||||||||||||||||||||||||||||\n";
+			for (int i = 0; i < admin.get_userArr_siz(); i++)
+			{
+				if (login == admin.get_userArr()[i].get_login() && password == admin.get_userArr()[i].get_password()) {
+					cout << "|  WELLCOME                         |\n";
+					while (true) {
+
+					}
+					break;
+				}
+			}
+		default:
+			break;
+		}									
+	}
 	/*User* user;
 	makeNewUser(&user);*/
 	User* user1 = new User("qwerty@gmail.com","qwerty123","Oleg","Olegov", "Olegovich","Olegova2",88005553535);
