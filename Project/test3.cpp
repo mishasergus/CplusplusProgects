@@ -418,7 +418,7 @@ public:
 	User* get_userArr() {
 		return userArr;
 	}
-	User* get_categoryArr() {
+	string* get_categoryArr() {
 		return categoryArr;
 	}
 	string get_own_password() {
@@ -1072,9 +1072,7 @@ int main()
 		cout << "|  2-as user                        |\n";
 		cin >> choise1;
 		cout << "|||||||||||||||||||||||||||||||||||||\n";
-		switch (choise1)
-		{
-		case 1:
+		if (choise1 == 1) {
 			cout << "|  Login:                           |\n";
 			cin >> login;
 			cout << "|  Password:                        |\n";
@@ -1095,19 +1093,17 @@ int main()
 					if (choise2 == 6) {
 						break;
 					}
-					switch (choise2)
-					{
-					case 1:
+					else if (choise2 == 1) {
 						cout << "|  Login:                           |\n";
 						cin >> adminLogin;
 						admin.set_own_login(adminLogin);
-						break;
-					case 2:
+					}
+					else if (choise2 == 2) {
 						cout << "|  Password:                        |\n";
 						cin >> adminpassword;
 						admin.set_own_password(adminpassword);
-						break;
-					case 3:
+					}
+					else if (choise2 == 3) {
 						int choise3;
 						cout << "|  1-make new user                  |\n";
 						cout << "|  2-edit user                      |\n";
@@ -1118,29 +1114,24 @@ int main()
 						if (choise3 == 4) {
 							break;
 						}
-						switch (choise3)
-						{
-						case 1:
-							User * user;
+						else if (choise3 == 1) {
+							User* user;
 							admin.makeNewUser(user);
-							break;
-						case 2:
-							int num;                                     
+						}
+						else if (choise3 == 2) {
+							int num;
 							cout << "|  User number(not index):          |\n";
 							cin >> num;
 							admin.edit(num);
-							break;
-						case 3:
+						}
+						else if (choise3 == 3) {
 							int num;
 							cout << "|  User number(not index):          |\n";
 							cin >> num;
 							admin.delUser(num);
-							break;
-						default:
-							break;
 						}
-						break;
-					case 4:
+					}
+					else if (choise2 == 4) {
 						int choise3;
 						cout << "|  1-alll marks                     |\n";
 						cout << "|  2-marks by category              |\n";
@@ -1151,16 +1142,14 @@ int main()
 						if (choise3 == 4) {
 							break;
 						}
-						break;
-					case 5:
-						break;
-					default:
-						break;
+					}
+					else if (choise2 == 5) {
+
 					}
 				}
 			}
-			break;
-		case 2:
+		}
+		else if (choise1 == 2) {
 			cout << "|  Login:                           |\n";
 			cin >> login;
 			cout << "|  Password:                        |\n";
@@ -1176,9 +1165,7 @@ int main()
 					break;
 				}
 			}
-		default:
-			break;
-		}									
+		}								
 	}
 	/*User* user;
 	makeNewUser(&user);*/
