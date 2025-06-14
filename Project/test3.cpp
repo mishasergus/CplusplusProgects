@@ -321,12 +321,12 @@ public:
 							baseSiz++;
 							delete[]testBase;
 							testBase = new string[baseSiz];
-							for (int j = 0;j < baseSiz;j++) {
-								if (j == baseSiz - 1) {
-									testBase[j] = to_string(nOfTest) + " " + to_string(i) + " " + to_string(correct);
+							for (int h = 0;h < baseSiz;h++) {
+								if (h == baseSiz - 1) {
+									testBase[h] = to_string(nOfTest) + " " + to_string(j) + " " + to_string(correct);
 								}
 								else {
-									testBase[j] = testBaseCopy[j];
+									testBase[h] = testBaseCopy[h];
 								}
 							}
 							delete[]testBaseCopy;
@@ -1321,7 +1321,7 @@ int main()
 							int numbOfTest;
 							for (int j = 0; j < admin.get_nameTest_siz(); j++)
 							{
-								cout << "  " << j << "-" << admin.get_namesOfTests()[j] << '\n';
+								cout << "  " << j+1 << "-" << admin.get_namesOfTests()[j] << '\n';
 							}
 							cout << "|  numbOfTest:                      |\n";
 							cin >> numbOfTest;
@@ -1330,7 +1330,7 @@ int main()
 						else if (choise2 == 2) {
 							int nOfSmth;
 							cout << "NOfTest|NOfQw|Corrects\n";
-							for (int j = 0; j < admin.get_userArr()[i].gettestBaseSiz(); j++)
+							for (int j = 0; j+1 < admin.get_userArr()[i].gettestBaseSiz(); j++)
 							{
 								cout << admin.get_userArr()[i].gettestBase()[j]<<"-"<<j<<'\n';
 							}
