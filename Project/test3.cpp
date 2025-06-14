@@ -1089,6 +1089,10 @@ public:
 int main()
 {
 	srand(time(0));	
+	fs::remove_all("Users");
+	fs::create_directory("Users");
+	fs::remove_all("Admin");
+	fs::create_directory("Admin");
 	string adminLogin;
 	string adminpassword;
 	cout << "|||||||||||||||||||||||||||||||||||||\n";
