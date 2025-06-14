@@ -605,7 +605,7 @@ public:
 			}
 		}
 		delete[]arrCopy;
-		fs::remove_all("Users/Uset"+to_string(numOfUser));
+		fs::remove_all("Users/User"+to_string(numOfUser));
 	}
 	void edit(int number){
 		while (true) {
@@ -836,25 +836,6 @@ public:
 			fstream obj1("Tests/Test" + to_string(n) + "/name.txt", ios::out);
 			if (obj1.is_open()) {
 				obj1 << category << ',' << name;
-				string* namesOfTestsCopy = new string[namesTestSiz];
-				for (int i = 0; i < namesTestSiz; i++)
-				{
-
-					namesOfTestsCopy[i] = namesOfTests[i];
-				}
-				delete[] namesOfTests;
-				namesTestSiz += 1;
-				namesOfTests = new string[namesTestSiz];
-				for (int i = 0; i < namesTestSiz; i++)
-				{
-					if (i == catSiz - 1) {
-						namesOfTests[i] = name;
-					}
-					else {
-						namesOfTests[i] = namesOfTestsCopy[i];
-					}
-				}
-				delete[] namesOfTestsCopy;
 			}
 			obj1.close();
 			int num = 1;
@@ -881,12 +862,13 @@ public:
 						if (choise == 1) {
 							break;
 						}
+						cout << endl;
 					}
 					while (true) {
 						char correctAnsw;
 						cout << "|  correctAnsw:                     |\n";
 						cin >> correctAnsw;
-						if (int(correctAnsw) >= 97 && int(correctAnsw) <= 122) {
+						if (int(correctAnsw) >= 97 && int(correctAnsw) <= x + 95) {
 							obj2 << correctAnsw << '\n';
 							break;
 						}
@@ -1033,7 +1015,7 @@ public:
 					char correctAnsw;
 					cout << "|  correctAnsw:                     |\n";
 					cin >> correctAnsw;
-					if (int(correctAnsw) >= 97 && int(correctAnsw) <= 122) {
+					if (int(correctAnsw) >= 97 && int(correctAnsw) <= x + 95) {
 						obj2 << correctAnsw << '\n';
 						break;
 					}
@@ -1278,7 +1260,7 @@ int main()
 								int numbOfTest;
 								for (int i = 0; i < admin.get_nameTest_siz(); i++)
 								{
-									cout << "  " << i << "-" << admin.get_namesOfTests()[i] << '\n';
+									cout << "  " << i+1 << "-" << admin.get_namesOfTests()[i] << '\n';
 								}
 								cout << "|  numbOfTest:                      |\n";
 								cin >> numbOfTest;
