@@ -1,55 +1,94 @@
-//#include <iostream>
-//#include <fstream>
-//#include <string>
-//#include <filesystem>
-//#include <cctype>
-//#include "StudentsProject.h"
-//using namespace std;
-//namespace fs = filesystem;
-//
-//class Phone_book {
-//    private:
-//        string name = "Def";
-//        int num = 0;
-//        string adress = "Def";
-//        int workPhone = 0;
-//    public:
-//        Phone_book() = default;
-//        Phone_book(string name, int num, string adress, int workPhone) {
-//            this->name = name;
-//            this->num = num;
-//            this->adress = adress;
-//            this->workPhone = workPhone;
-//        }
-//        void show() {
-//            cout << "name: " << name << "num: " << num << "adress: " << adress << "workPhone: " << workPhone;
-//        }
-//        string get_name() {
-//            return name;
-//        }
-//        string get_adress() {
-//            return adress;
-//        }
-//        int get_num() {
-//            return num;
-//        }
-//        int get_workPhone() {
-//            return workPhone;
-//        }
-//        void set_name(string name1){
-//            name = name1;
-//        }
-//        void set_adress(string adress) {
-//            adress = adress;
-//        }
-//        void set_num(int num1) {
-//            num = num1;
-//        }
-//        void set_workPhone(int workPhone1) {
-//            workPhone = workPhone;
-//        }
-//};
-//
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <filesystem>
+#include <cctype>
+#include "StudentsProject.h"
+using namespace std;
+namespace fs = filesystem;
+
+class Phone_book {
+    private:
+        string name = "Def";
+        string surename = "Def";
+        string fathername = "Def";
+        string adress = "Def";
+        int workPhone = 0;
+        int homePhone = 0;
+        int mobilePhone = 0;
+        string inf = "Def";
+    public:
+        Phone_book() = default;
+        Phone_book(string name , string surename, string fathername, string adress, int workPhone, int homePhone, int mobilePhone, string inf = "Def") {
+            this->name = name;
+            this->surename = surename;
+            this->fathername = fathername;
+            this->adress = adress;
+            this->workPhone = workPhone;
+            this->homePhone = homePhone;
+            this->mobilePhone = mobilePhone;
+            this->inf = inf;
+            if (fs::exists("PhoneBook.txt")) {
+                fstream obj("PhoneBook.txt", ios::out);
+                if (obj.is_open()) {
+                    obj << "name: " << name << " surename: " << surename << " fathername: " << fathername << " adress: " << adress << " workPhone: " << workPhone << "homePhone: " << homePhone << " mobilePhone: " << mobilePhone << " inf: " << inf << "\n";
+                }
+                obj.close();
+            }
+        }
+        void show() {
+            cout << "name: " << name << " surename: "<<surename << " fathername: " << fathername <<" adress: " << adress << " workPhone: " << workPhone << "homePhone: " << homePhone << " mobilePhone: " << mobilePhone << " inf: " << inf << "\n";
+        }
+        string get_name() {
+            return name;
+        }
+        string get_surename() {
+            return surename;
+        }
+        string get_fathername() {
+            return fathername;
+        }
+        string get_adress() {
+            return adress;
+        }
+        int get_workPhone() {
+            return workPhone;
+        }
+        int get_homePhone() {
+            return homePhone;
+        }
+        int get_mobilePhone() {
+            return mobilePhone;
+        }
+        string get_inf() {
+            return inf;
+        }
+        void set_name(string name){
+            this->name = name;
+        }
+        void set_surename(string surename) {
+            this->surename = surename;
+        }
+        void set_fathername(string fathername) {
+            this->fathername = fathername;
+        }
+        void set_adress(string adress) {
+            this->adress = adress;
+        }
+        void set_workPhone(int workPhone) {
+            this->workPhone = workPhone;
+        }
+        void set_homePhone(int homePhone) {
+            this->homePhone = homePhone;
+        }
+        void set_mobilePhone(int mobilePhone) {
+            this->mobilePhone = mobilePhone;
+        }
+        void set_inf(string inf) {
+            this->inf = inf;
+        }
+};
+
 //class Point {
 //private:
 //    float coord[3] = { 0,0,0 };
@@ -105,7 +144,7 @@
 //        obj1.close();
 //    }
 //};
-//
+
 //class Drib {
 //private:
 //    int drib[2] = { 0,0};
@@ -170,16 +209,23 @@
 //    cout << d1.get_chiselnic() * d2.get_znamennic() << "\n";
 //    cout  << d1.get_znamennic() * d2.get_chiselnic() << "\n";
 //}
-//int main()
-//{
-//    srand(time(0));
-//    Drib drib1(97,11);
-//    Drib drib2(56, 4);
-//    addDrib(drib1, drib2);
-//
-//    /*Phone_book* phone_book1 = new Phone_book("nam", 3, "Olegova3", 8800555535);
-//    cout << phone_book1->get_adress();
-//    cout << phone_book1->get_name();
-//    cout << phone_book1->get_num();
-//    cout << phone_book1->get_workPhone();*/
-//}
+int main()
+{
+    srand(time(0));
+    fs::remove_all("PhoneBook.txt");
+    fstream obj("PhoneBook.txt", ios::out);
+    obj.close();
+    /*Drib drib1(97,11);
+    Drib drib2(56, 4);
+    addDrib(drib1, drib2);*/
+
+    Phone_book* phone_book1 = new Phone_book("nam", "q", "Olegova3", "q",1,1,1,"r");
+    fstream obj2("PhoneBook.txt", ios::in);
+    string txt;
+    if (obj2.is_open()) {
+        for (;getline(obj2, txt);) {
+            cout << txt << '\n';
+        }
+    }
+    obj2.close();
+}

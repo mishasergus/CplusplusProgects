@@ -1,0 +1,1 @@
+name: nam surename: q fathername: Olegova3 adress: q workPhone: 1homePhone: 1 mobilePhone: 1 inf: r
