@@ -315,8 +315,8 @@
 //						cin >> answ;
 //						if (answ == "exit") {
 //							string* testBaseCopy = new string[baseSiz];
-//							for (int j = 0;j < baseSiz;j++) {
-//								testBaseCopy[j] = testBase[j];
+//							for (int h = 0;h < baseSiz;h++) {
+//								testBaseCopy[h] = testBase[h];
 //							}
 //							baseSiz++;
 //							delete[]testBase;
@@ -341,6 +341,9 @@
 //
 //			}
 //			obj2.close();
+//			if (answ == "exit\n") {
+//				break;
+//			}
 //		}
 //		if (n != 0&&answ!="exit\n") {
 //			fstream obj1(nameOfMark, ios::out);
@@ -532,8 +535,20 @@
 //	///////////////////////////////////////////////////////////////////////////////////////////
 //	void makeNewUser(User *&user) {
 //		string mail1;
-//		cout << "E-mail:\n";
-//		cin >> mail1;
+//		while (true) {
+//			bool tr = true;
+//			cout << "E-mail:\n";
+//			cin >> mail1;
+//			for (int i = 0; i < userSiz; i++)
+//			{
+//				if (userArr[i].get_login() == mail1) {
+//					tr = false;
+//				}
+//			}
+//			if (tr) {
+//				break;
+//			}
+//		}
 //
 //		string password1;
 //		cout << "Password:\n";
@@ -1334,7 +1349,7 @@
 //						else if (choise2 == 2) {
 //							int nOfSmth;
 //							cout << "NOfTest|NOfQw|Corrects\n";
-//							for (int j = 0; j+1 < admin.get_userArr()[i].gettestBaseSiz(); j++)
+//							for (int j = 0; j < admin.get_userArr()[i].gettestBaseSiz(); j++)
 //							{
 //								cout << admin.get_userArr()[i].gettestBase()[j]<<"-"<<j<<'\n';
 //							}
