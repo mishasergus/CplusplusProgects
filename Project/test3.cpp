@@ -631,6 +631,12 @@ public:
 		}
 		delete[]arrCopy;
 		fs::remove_all("Users/User"+to_string(numOfUser));
+		for (int i = numOfUser+1; i <= userSiz+1; i++)
+		{
+			if (fs::exists("Users/User" + to_string(i))) {
+				fs::rename("Users/User" + to_string(i), "Users/User" + to_string(i - 1));
+			}
+		}
 	}
 	void edit(int number){
 		while (true) {
