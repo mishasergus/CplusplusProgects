@@ -109,6 +109,9 @@
     <Filter Include="Cw\Cw17">
       <UniqueIdentifier>{5b5af04e-3e64-4cde-a760-89b6ae3aff3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hw\Hw17">
+      <UniqueIdentifier>{0649008a-4815-4fdd-a8be-e587118615e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Hw1_1.cpp">
@@ -218,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="Cw17_1.cpp">
       <Filter>Cw\Cw17</Filter>
+    </ClCompile>
+    <ClCompile Include="Hw17_1.cpp">
+      <Filter>Hw\Hw17</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -149,6 +149,7 @@
     <ClCompile Include="Hw12_1.cpp" />
     <ClCompile Include="Hw14_1.cpp" />
     <ClCompile Include="Hw15_1.cpp" />
+    <ClCompile Include="Hw17_1.cpp" />
     <ClCompile Include="Hw1_1.cpp" />
     <ClCompile Include="Hw2_1.cpp" />
     <ClCompile Include="Hw3_1.cpp" />
