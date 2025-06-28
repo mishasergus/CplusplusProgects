@@ -111,6 +111,32 @@ public:
             }
         }
     }
+    T max() {
+        T max = 0;
+        for (int i = 0; i < r; i++)
+        {
+            for (int j = 0; j < c; j++)
+            {
+                if (matr[i][j] > max) {
+                    max = matr[i][j];
+                }
+            }
+        }
+        return max;
+    }
+    T min() {
+        T max = 0;
+        for (int i = 0; i < r; i++)
+        {
+            for (int j = 0; j < c; j++)
+            {
+                if (matr[i][j] < min) {
+                    min = matr[i][j];
+                }
+            }
+        }
+        return min;
+    }
 
     friend ostream& operator <<(ostream& output,const Matrix<T>& tmp) {
         for (int i = 0; i < tmp.r; i++)
@@ -183,10 +209,10 @@ int main()
 {
     srand(time(0));
     Matrix<int>* m1 = new Matrix<int>(2, 2);
-    m1->entByRand();
+    m1->entByKeyb();
     cout << *m1;
     Matrix<int>* m2 = new Matrix<int>(2, 2);
-    m2->entByRand();
+    m2->entByKeyb();
     cout << *m2 << '\n';
     cout << *m2 + *m1 << '\n';
     cout << *m2 - *m1 << '\n';
