@@ -125,7 +125,7 @@ public:
         return max;
     }
     T min() {
-        T min = matr[0][0;
+        T min = matr[0][0];
         for (int i = 0; i < r; i++)
         {
             for (int j = 0; j < c; j++)
