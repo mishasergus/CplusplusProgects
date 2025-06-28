@@ -112,7 +112,7 @@ public:
         }
     }
 
-    friend ostream& operator <<(ostream& output, Matrix<T>& tmp) {
+    friend ostream& operator <<(ostream& output,const Matrix<T>& tmp) {
         for (int i = 0; i < tmp.r; i++)
         {
             for (int j = 0; j < tmp.c; j++)
@@ -124,9 +124,9 @@ public:
         return output;
     }
 
-    Matrix operator +(Matrix& tmp) {
+    Matrix operator +(const Matrix& tmp) {
         if (r == tmp.r && c == tmp.c) {
-            Matrix result(r, c);
+            Matrix<T> result(r, c);
             for (int i = 0; i < r; i++) {
                 for (int j = 0; j < c; j++) {
                     result.matr[i][j] = matr[i][j] + tmp.matr[i][j];
@@ -134,12 +134,12 @@ public:
             }
             return result;
         }
-        return Matrix m(1, 1);
+        return Matrix<T> (1, 1);
     }
 
-    Matrix operator -(Matrix& tmp) {
+    Matrix operator -(const Matrix& tmp) {
         if (r == tmp.r && c == tmp.c) {
-            Matrix result(r, c);
+            Matrix <T>result(r, c);
             for (int i = 0; i < r; i++) {
                 for (int j = 0; j < c; j++) {
                     result.matr[i][j] = matr[i][j] - tmp.matr[i][j];
@@ -147,11 +147,11 @@ public:
             }
             return result;
         }
-        return Matrix m(1, 1);
+        return Matrix<T> (1, 1);
     }
 
     Matrix operator *(T n) {
-        Matrix result(r, c);
+        Matrix <T>result(r, c);
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
                 result.matr[i][j] = matr[i][j] * n;
@@ -160,21 +160,21 @@ public:
         return result;
     }
 
-    Matrix operator *(Matrix& tmp) {
+    Matrix operator *(const Matrix& tmp) {
         if (c == tmp.r) {
-            Matrix result(r, tmp.c);
+            Matrix <T>result(r, tmp.c);
             for (int i = 0; i < r; i++) {
                 for (int j = 0; j < tmp.c; j++) {
                     result.matr[i][j] = 0;
                     for (int h = 0; h < tmp.r; h++)
                     {
-                        result.matr[i][j]+=matr[i][h]* tmp.matr[h][j]
+                        result.matr[i][j] += matr[i][h] * tmp.matr[h][j];
                     }
                 }
             }
             return result;
         }
-        return Matrix<int> m(1,1);
+        return Matrix<T> (1,1);
     }
     
 };
@@ -185,5 +185,13 @@ int main()
     Matrix<int>* m1 = new Matrix<int>(2, 2);
     m1->entByRand();
     cout << *m1;
+    Matrix<int>* m2 = new Matrix<int>(2, 2);
+    m2->entByRand();
+    cout << *m2 << '\n';
+    cout << *m2 + *m1 << '\n';
+    cout << *m2 - *m1 << '\n';
+
+    cout << *m1 * 2<<'\n';
+    cout << *m1 * *m2 << '\n';
 
 }
