@@ -136,6 +136,7 @@
     <ClCompile Include="Cw15_1.cpp" />
     <ClCompile Include="Cw16_1.cpp" />
     <ClCompile Include="Cw17_1.cpp" />
+    <ClCompile Include="Cw18_1.cpp" />
     <ClCompile Include="Cw2_1.cpp" />
     <ClCompile Include="Cw2_2.cpp" />
     <ClCompile Include="Cw3_1.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Hw14_1.cpp" />
     <ClCompile Include="Hw15_1.cpp" />
     <ClCompile Include="Hw17_1.cpp" />
+    <ClCompile Include="Hw18_1.cpp" />
     <ClCompile Include="Hw1_1.cpp" />
     <ClCompile Include="Hw2_1.cpp" />
     <ClCompile Include="Hw3_1.cpp" />
